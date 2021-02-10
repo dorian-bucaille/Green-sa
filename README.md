@@ -123,7 +123,9 @@ ___Sauvegardez les propriétés (ctrl+s).___
   <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_formsupdate.jpg?raw=true" alt="Bandeau Forms">
 </p>
 
-#### 4.3.4 Mettre à jour les packages NuGet en cliquant-droit sur 'GreenSa.Android' puis 'Manage NuGet Packages...'. Vérifiez ici que les plugins 'Xamarin.Forms' et 'Xamarin.Forms.Maps' soient installés et à jour. Si ce n'est pas le cas, faites-le.
+### 4.4 Mettre à jour les packages NuGet
+
+#### 4.4.1 Cliquez-droit sur 'GreenSa.Android' puis 'Manage NuGet Packages...'. Vérifiez ici que les plugins 'Xamarin.Forms' et 'Xamarin.Forms.Maps' soient installés et à jour. Si ce n'est pas le cas, faites-le.
 
 <p align="center">
   <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/nuget.jpg?raw=true" alt="Ouvrir NuGet">
@@ -131,6 +133,30 @@ ___Sauvegardez les propriétés (ctrl+s).___
 
 <p align="center">
   <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/nuget2.jpg?raw=true" alt="Check versions à jour NuGet">
+</p>
+
+#### 4.4.2 Si des Warnings indiquent qu'il manque des paquets, il faut les réinstaller en utilisant le manager de packages NuGet (mettre le nom du/des package(s) manquant(s) dans la catégorie 'Browse', puis installer)
+
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/nuget3.jpg?raw=true" alt="Installer un package NuGet">
+</p>
+
+### 4.5 Derniers ajustements...
+
+#### 4.5.1 Relancez Visual Studio, puis essayez un build en cliquant sur 'Build' et 'Build Solution'. Si aucune erreur n'apparaît, bravo, vous avez build l'application avec succès !
+
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/build.jpg?raw=true" alt="Tentative de build">
+</p>
+
+#### 4.5.2 Sinon, normalement vous n'avez que des erreurs de références ambiguës. Dans ce cas, pour chaque erreur, double-cliquez dessus pour afficher le fichier posant problème et ajoutez le chemin d'un des deux packages proposés dans l'erreur. Au prochain build, si l'erreur est encore présente alors il faut mettre le chemin de l'autre package.
+
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/ambiguous.jpg?raw=true" alt="Erreur de références">
+</p>
+
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/ambiguous2.jpg?raw=true" alt="Erreur de références : fix">
 </p>
 
 # Télécharger Green'Sa
