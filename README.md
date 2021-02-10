@@ -97,20 +97,40 @@ Green'Sa est une application mobile ayant pour but d'analyser les performances d
   <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_android3.jpg?raw=true" alt="Installer les SDK 3">
 </p>
 
-#### 4.3.2 Changer les propriétés du projet en double-cliquant sur 'Properties' dans le menu déroulant de 'GreenSa.Android'. Dans 'Application', sélectionnez 'Android 10.0 (Q)' et cliquez sur 'Yes'.
+#### 4.3.2 Changer les propriétés du projet en double-cliquant sur 'Properties' dans le menu déroulant de 'GreenSa.Android'. Dans 'Application', sélectionnez 'Android 10.0 (Q)' et cliquez sur 'Yes'. Dans 'Android Manifest', mettez 'Android 4.1 (API Level 16 - Jelly Bean)' pour 'Minimum Android version'. Dans 'Android Options', mettez 'Linking' à 'None'.
 
 <p align="center">
   <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_properties.jpg?raw=true" alt="Changer les propriétés 1">
 </p>
 
 <p align="center">
-  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_properties2.jpg?raw=true" alt="Changer les propriétés 2">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_properties2.jpg?raw=true" alt="Changer les propriétés Application">
 </p>
+
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_properties3.jpg?raw=true" alt="Changer les propriétés Android Manifest">
+</p>
+
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_properties4.jpg?raw=true" alt="Changer les propriétés Android Options">
+</p>
+
+___Sauvegardez les propriétés (ctrl+s).___
 
 #### 4.3.3 Si ce message apparaît, cliquez sur 'Update Xamarin.Forms Packages'.
 
 <p align="center">
   <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_formsupdate.jpg?raw=true" alt="Bandeau Forms">
+</p>
+
+#### 4.3.4 Mettre à jour les packages NuGet en cliquant-droit sur 'GreenSa.Android' puis 'Manage NuGet Packages...'. Vérifiez ici que les plugins 'Xamarin.Forms' et 'Xamarin.Forms.Maps' soient installés et à jour. Si ce n'est pas le cas, faites-le.
+
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/nuget.jpg?raw=true" alt="Ouvrir NuGet">
+</p>
+
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/nuget2.jpg?raw=true" alt="Check versions à jour NuGet">
 </p>
 
 # Télécharger Green'Sa
