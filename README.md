@@ -1,5 +1,5 @@
 # Green'Sa
-Green'Sa est une application mobile ayant pour but de sauvegarder les performances des golfeurs et de les conseiller dans leurs plans de jeu.
+Green'Sa est une application mobile ayant pour but d'analyser les performances des golfeurs afin de les conseiller dans leurs plans de jeu.
 
 # Avancement du projet
 **Ce qui est déjà fait**
