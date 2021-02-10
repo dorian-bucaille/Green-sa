@@ -107,6 +107,11 @@ Green'Sa est une application mobile ayant pour but d'analyser les performances d
   <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_properties2.jpg?raw=true" alt="Changer les propriétés 2">
 </p>
 
+#### 4.3.3 Si ce message apparaît, cliquez sur 'Update Xamarin.Forms Packages'.
+
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_formsupdate.jpg?raw=true" alt="Bandeau Forms">
+</p>
 
 # Télécharger Green'Sa
 
