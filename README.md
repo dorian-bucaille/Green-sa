@@ -72,6 +72,42 @@ Green'Sa est une application mobile ayant pour but d'analyser les performances d
   <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_visualstudio1.jpg?raw=true" alt="Auto install">
 </p>
 
+### 4.2 Si ce message s'affiche, cliquez sur 'Install' sur le message puis dans la pop-up
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_visualstudio2.jpg?raw=true" alt="Auto install message">
+</p>
+
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_visualstudio3.jpg?raw=true" alt="Auto install pop-up">
+</p>
+
+### 4.3 Passer le projet sous Android 10.0
+
+#### 4.3.1 Installer les SDK correspondantes en cliquant sur 'Tools', 'Android' puis 'Android SDK Manager...'. En bas à droite, cliquez sur l'engrenage puis 'Repository', 'Full List (Unsupported)'. Ensuite, cochez 'Sources for Android 29' et 'Google Play Intel x86 Atom System Image'. Cliquez sur 'Accept'.
+
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_android.jpg?raw=true" alt="Installer les SDK 1">
+</p>
+
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_android2.jpg?raw=true" alt="Installer les SDK 2">
+</p>
+
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_android3.jpg?raw=true" alt="Installer les SDK 3">
+</p>
+
+#### 4.3.2 Changer les propriétés du projet en double-cliquant sur 'Properties' dans le menu déroulant de 'GreenSa.Android'. Dans 'Application', sélectionnez 'Android 10.0 (Q)' et cliquez sur 'Yes'.
+
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_properties.jpg?raw=true" alt="Changer les propriétés 1">
+</p>
+
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_properties2.jpg?raw=true" alt="Changer les propriétés 2">
+</p>
+
+
 # Télécharger Green'Sa
 
 Une fois le fichier téléchargé, il suffit de l'ouvrir pour lancer le processus d'installation.
