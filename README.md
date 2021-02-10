@@ -14,11 +14,22 @@ Green'Sa est une application mobile ayant pour but de sauvegarder les performanc
 - Corriger erreurs
 
 # Installation et configuration du projet
+
 ## 0. Prérequis
 - Avoir une machine sous Windows (Visual Studio 2019 n'est pas disponible sur Linux/Mac)
 - Avoir un compte GitHub (pour cloner ce repository dans le vôtre)
 
 ## 1. Cloner le repository sur votre GitHub
+
+### 1.1 Connectez-vous sur GitHub et cliquez sur 'Import repository' dans le menu déroulant en haut à droite
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/clone_repo_github1.jpg?raw=true" alt="'Import repository' sur GitHub">
+</p>
+
+### 1.2 Indiquez l'URL de ce repository et choisissez un nom pour le vôtre
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/clone_repo_github2.jpg?raw=true" alt="Importation du repository sur GitHub">
+</p>
 
 ## 2. Installer Visual Studio
 
