@@ -64,6 +64,14 @@ Green'Sa est une application mobile ayant pour but de sauvegarder les performanc
 <p align="center">
   <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/clone_repo2.jpg?raw=true" alt="Clonage du repository GitHub">
 </p>
+
+## 4. Configurer Visual Studio
+
+### 4.1 Si cette fenêtre s'affiche, laissez tout coché et cliquez sur 'Install'
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/setup_visualstudio1.jpg?raw=true" alt="Auto install">
+</p>
+
 # Télécharger Green'Sa
 
 Une fois le fichier téléchargé, il suffit de l'ouvrir pour lancer le processus d'installation.
