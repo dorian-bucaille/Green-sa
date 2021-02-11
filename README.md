@@ -159,6 +159,12 @@ ___Sauvegardez les propriétés (ctrl+s).___
   <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/ambiguous2.jpg?raw=true" alt="Erreur de références : fix">
 </p>
 
+#### 4.5.3 Si une erreur 'java.exe' apparaît lors du build, installez Java (https://java.com/en/download/) et le JDK (https://www.oracle.com/java/technologies/javase-downloads.html), puis relancez Visual Studio. Enfin, cliquez sur 'Build', 'Clean Solution' puis re-buildez le projet. L'erreur a normalement disparu.
+
+<p align="center">
+  <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/error_javaexe.jpg?raw=true" alt="Erreur java.exe">
+</p>
+
 # Télécharger Green'Sa
 
 Une fois le fichier téléchargé, il suffit de l'ouvrir pour lancer le processus d'installation.
