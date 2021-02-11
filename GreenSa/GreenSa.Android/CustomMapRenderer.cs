@@ -30,16 +30,16 @@ namespace Greensa.Droid
     {
 
         GoogleMap map;
-        private Polyline targetLine;//the current polyline
-        private List<Polyline> coneLines;
-        private Circle circle;
-        private Circle circleMin;
-        private Circle circleMax;
+        private Android.Gms.Maps.Model.Polyline targetLine;//the current polyline
+        private List<Android.Gms.Maps.Model.Polyline> coneLines;
+        private Android.Gms.Maps.Model.Circle circle;
+        private Android.Gms.Maps.Model.Circle circleMin;
+        private Android.Gms.Maps.Model.Circle circleMax;
 
 
 
         public CustomMapRenderer(Context context) : base(context){
-            coneLines = new List<Polyline>();
+            coneLines = new List<Android.Gms.Maps.Model.Polyline>();
             MessagingCenter.Subscribe<CustomMap>(this, "updateTheMap", (sender) => {
                 try
                 {
@@ -110,14 +110,14 @@ namespace Greensa.Droid
             {
                 marker.Draggable(true);
                 marker.SetRotation(30.5f);
-                BitmapDescriptor ic = BitmapDescriptorFactory.FromResource(Resource.Drawable.Target);
+                BitmapDescriptor ic = BitmapDescriptorFactory.FromResource(GreenSa.Droid.Resource.Drawable.Target);
 
                 marker.SetIcon(ic);
                 marker.Anchor(0.5f, 0.5f);
             }
             else if (((CustomPin)(pin)).type == CustomPin.HOLE)
             {
-                marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.flag));
+                marker.SetIcon(BitmapDescriptorFactory.FromResource(GreenSa.Droid.Resource.Drawable.flag));
             }
             else if (((CustomPin)(pin)).type == CustomPin.USER)
             {
@@ -137,7 +137,7 @@ namespace Greensa.Droid
         {
             if (coneLines.Count != 0)
             {
-                foreach (Polyline line in coneLines)
+                foreach (Android.Gms.Maps.Model.Polyline line in coneLines)
                 {
                     line.Remove();
                 }

@@ -100,7 +100,7 @@ namespace Greensa.Droid
                     };
                     MessagingCenter.Send<Pin>(pin, "getAddGolfMapPins");
                     var marker = base.CreateMarker(pin);
-                    BitmapDescriptor ic = BitmapDescriptorFactory.FromResource(Resource.Drawable.flag);
+                    BitmapDescriptor ic = BitmapDescriptorFactory.FromResource(GreenSa.Droid.Resource.Drawable.flag);
                     marker.SetIcon(ic);
                     var addedMarker = this.map.AddMarker(marker);
                     this.Markers.Add(addedMarker);
