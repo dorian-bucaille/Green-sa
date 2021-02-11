@@ -165,6 +165,8 @@ ___Sauvegardez les propriétés (ctrl+s).___
   <img src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/setup_screenshots/error_javaexe.jpg?raw=true" alt="Erreur java.exe">
 </p>
 
+### 4.6 (Optionnel) Installez WHPX pour booster les performances de l'émulateur Android. Tutoriel ici : https://developer.android.com/studio/run/emulator-acceleration#vm-windows-whpx
+
 # Télécharger Green'Sa
 
 Une fois le fichier téléchargé, il suffit de l'ouvrir pour lancer le processus d'installation.
