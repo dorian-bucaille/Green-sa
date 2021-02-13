@@ -13,7 +13,9 @@ using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
 using GreenSa.Models.Profiles;
+
 
 namespace GreenSa.ViewController.Play.Game
 {
@@ -21,11 +23,11 @@ namespace GreenSa.ViewController.Play.Game
     public partial class MainGamePage : ContentPage
     {
 
-        private int state; //0 when ready to shot and 1 when ready to localize
+        private int state; // 0 when ready to shot and 1 when ready to localize
         private Partie partie;
         private int holFini;
         private double dUserTarget;
-        private double dUserTargetTemp;//used to chose a club when the target moved more than 10 meters
+        private double dUserTargetTemp; // Used to choose a club when the target moved more than 10 meters
 
         public MainGamePage(Partie partie)
         {
@@ -90,7 +92,7 @@ namespace GreenSa.ViewController.Play.Game
             score.HeightRequest = MainPage.responsiveDesign(100);
             score.WidthRequest = MainPage.responsiveDesign(100);
 
-            GestionGolfs.calculAverageAsync(partie.Clubs);//Load average club distances
+            GestionGolfs.calculAverageAsync(partie.Clubs); // Load average club distances
 
             dUserTargetTemp = -1;
             hideCard();
@@ -124,17 +126,15 @@ namespace GreenSa.ViewController.Play.Game
             loadCard();
         }
 
-        /**
-         * This method is executed when the page is loaded
-         * */
+        // This method is executed when the page is loaded
         async protected override void OnAppearing()
         {
             base.OnAppearing();
             if (holFini == 0)
                 return;
 
-            //if there is still a hole to play
-            if (partie.nextHole() && holFini != 2)//holFini == 2 means the user wants to stop the game before the end
+            // If there is still a hole to play, start next hole
+            if (partie.nextHole() && holFini != 2) // holFini == 2 means the user wants to stop the game before the end
             {
                 updateScore();
                 loadCard();
@@ -143,22 +143,25 @@ namespace GreenSa.ViewController.Play.Game
                 numcoup.Text = partie.getCurrentHoleNumero() + "";
                 parTrou.Text = "PAR " + partie.getNextHole().Par.ToString();
                 MyPosition position = new MyPosition(0, 0);
-                //make sure that the GPS is avaible
+
+                // Update current position
                 try
                 {
                     position = await localize();
                     map.setUserPosition(position, partie.Shots.Count);
-                    partie.CurrentClub = partie.CurrentClub;//just to update the circle
+                    partie.CurrentClub = partie.CurrentClub; // Update the circle
                 }
+
+                // If GPS is not available, display a message
                 catch (Exception e)
                 {
-                    await DisplayAlert("Gps non disponible", "La localisation GPS n'est pas disponible, assurez-vous de l'avoir activé.", "OK");
-                    await Navigation.PopToRootAsync();//come back to root to avoid any problems in the game flow
+                    await DisplayAlert("GPS non disponible", "La localisation GPS n'est pas disponible. Assurez-vous de l'avoir activée dans les paramètres.", "OK");
+                    await Navigation.PopToRootAsync(); // Come back to root to avoid any problem in the game flow
                 }
 
                 updateDistance(true);
 
-                //manage the wind icon
+                // Update wind info
                 try
                 {
                     WindService service = new WindService();
@@ -172,18 +175,21 @@ namespace GreenSa.ViewController.Play.Game
 
                     });
                 }
+
+                // If wind is not available, display a message
                 catch (Exception e)
                 {
-                    await DisplayAlert("Vent non disponible", "L'information concernant le vent n'est pas disponible", "OK");
+                    await DisplayAlert("Vent non disponible", "L'information concernant le vent n'est pas disponible.", "OK");
                 }
-
-
             }
-            else//user wants to stop the game
+
+            // User wants to stop the game
+            else
             {
                 await Navigation.PushAsync(new GameFinishedPage(partie));
                 return;
             }
+
             holFini = 0;
         }
 

@@ -23,12 +23,13 @@ namespace GreenSa.Droid
 
             base.OnCreate(bundle);
             Plugin.CurrentActivity.CrossCurrentActivity.Current.Activity = this;
-           /* LocationManager locationManager = (LocationManager)Forms.Context.GetSystemService(Context.LocationService);
 
-            if (locationManager.IsProviderEnabled(LocationManager.GpsProvider) == false)*/
+            /* LocationManager locationManager = (LocationManager)Forms.Context.GetSystemService(Context.LocationService);
+
+             if (locationManager.IsProviderEnabled(LocationManager.GpsProvider) == false)*/
 
 
-                global::Xamarin.Forms.Forms.Init(this, bundle);
+            global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
         }
 
