@@ -19,7 +19,7 @@ namespace GreenSa.Models.GolfModel
     public class StatistiquesGolf
     {
 
-        /**
+        /*
          * Gets the average distance for all clubs
          * if clubs  parameter is null then it deals with all clubs
          * */
@@ -98,7 +98,7 @@ namespace GreenSa.Models.GolfModel
         }
 
         /**
-         * Gets the games that wasn't finished yet on a specific golf course
+         * Gets the games that are not finished yet on a specific golf course
          * golfCourse : the specific golf course
          */
         public static async Task<List<ScorePartie>> getNotFinishedGames(GolfCourse golfCourse)

@@ -16,11 +16,12 @@ using Android.Gms.Maps;
 using static Android.Gms.Maps.GoogleMap;
 using Xamarin.Forms;
 using GreenSa.Models.Tools.GPS_Maps;
+using GreenSa.Models.Tools;
 using Greensa.Droid;
-using GreenSa.Droid;
 using System.Collections.ObjectModel;
 using GreenSa.Models.GolfModel;
 using GreenSa.ViewController.Play.Game;
+
 using Geodesy;
 
 [assembly: ExportRenderer(typeof(CustomMap), typeof(CustomMapRenderer))]
@@ -44,7 +45,7 @@ namespace Greensa.Droid
                 try
                 {
                     UpdatePolyLinePos(false);
-                    UpdateShotCone(Math.PI / 4);
+                    UpdateShotCone(0.5);
                 }
                 catch(Exception e) { }
             });
@@ -149,20 +150,33 @@ namespace Greensa.Droid
             LatLng userPos = new LatLng(customMap.UserPin.Position.Latitude, customMap.UserPin.Position.Longitude);
 
             if (customMap != null)
-            {
+            {   
                 distTarget = customMap.getDistanceUserTarget();
-                addConePolyline(angle, geoCalculator, customMap, userPos, distTarget);
-                addConePolyline(-angle, geoCalculator, customMap, userPos, distTarget);
+                //addConePolyline(angle, geoCalculator, customMap, userPos, distTarget);  // Draws the upper part of the cone
+                addConePolyline(-angle, geoCalculator, customMap, userPos, distTarget);  // Draws the lower part of the cone
             }
         }
 
+
+        /* Draws a circle at the average distance based on the player's stats for a given club
+        private void drawAvgDistance(Club club)
+        {
+            StatistiquesGolf stat = new StatistiquesGolf();
+            double dist = stat.getAverageDistanceForClubsAsync(club);
+
+            var polylineOptions = new PolylineOptions()
+        }
+        */
+
+        // Draws a cone's side
         private void addConePolyline(double angle, GeodeticCalculator geoCalculator, CustomMap customMap, LatLng userPos, double distTarget)
         {
             var polylineOptions = new PolylineOptions();
             polylineOptions.Clickable(true);
             polylineOptions.InvokeJointType(JointType.Round);
             polylineOptions.InvokeWidth(10f);
-            polylineOptions.InvokeColor(0x664444FF);
+            // polylineOptions.InvokeColor(0x664444FF); // Blue
+            polylineOptions.InvokeColor(0x66FF44F7); // Pink
 
             polylineOptions.Add(userPos);
             LatLng conePoint = movePoint(angle, customMap.UserPin.Position, customMap.TargetPin.Position);
@@ -171,6 +185,7 @@ namespace Greensa.Droid
             coneLines.Add(map.AddPolyline(polylineOptions));
         }
 
+        // Moves a point given ???
         private LatLng movePoint(double angle, Position rotationCenter, Position p)
         {
             double xU = p.Latitude - rotationCenter.Latitude;
