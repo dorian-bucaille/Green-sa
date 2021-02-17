@@ -45,7 +45,7 @@ namespace Greensa.Droid
                 try
                 {
                     UpdatePolyLinePos(false);
-                    UpdateShotCone(0.5);
+                    UpdateShotCone(Math.PI / 4);
                 }
                 catch(Exception e) { }
             });
@@ -151,32 +151,21 @@ namespace Greensa.Droid
 
             if (customMap != null)
             {   
-                distTarget = customMap.getDistanceUserTarget();
-                //addConePolyline(angle, geoCalculator, customMap, userPos, distTarget);  // Draws the upper part of the cone
-                addConePolyline(-angle, geoCalculator, customMap, userPos, distTarget);  // Draws the lower part of the cone
+                distTarget = customMap.getDistanceUserTarget();  // In meters
+                addConePolyline(-angle, geoCalculator, customMap, userPos, distTarget);  // Draws one part of the cone
+                addConePolyline(angle, geoCalculator, customMap, userPos, distTarget);  // Draws the other part of the cone
             }
         }
-
-
-        /* Draws a circle at the average distance based on the player's stats for a given club
-        private void drawAvgDistance(Club club)
-        {
-            StatistiquesGolf stat = new StatistiquesGolf();
-            double dist = stat.getAverageDistanceForClubsAsync(club);
-
-            var polylineOptions = new PolylineOptions()
-        }
-        */
 
         // Draws a cone's side
         private void addConePolyline(double angle, GeodeticCalculator geoCalculator, CustomMap customMap, LatLng userPos, double distTarget)
         {
             var polylineOptions = new PolylineOptions();
-            polylineOptions.Clickable(true);
-            polylineOptions.InvokeJointType(JointType.Round);
+            // polylineOptions.Clickable(true);
+            // polylineOptions.InvokeJointType(JointType.Round);
             polylineOptions.InvokeWidth(10f);
             // polylineOptions.InvokeColor(0x664444FF); // Blue
-            polylineOptions.InvokeColor(0x66FF44F7); // Pink
+            polylineOptions.InvokeColor(Android.Graphics.Color.Argb(240, 255, 20, 147)); // Pink
 
             polylineOptions.Add(userPos);
             LatLng conePoint = movePoint(angle, customMap.UserPin.Position, customMap.TargetPin.Position);
@@ -185,15 +174,20 @@ namespace Greensa.Droid
             coneLines.Add(map.AddPolyline(polylineOptions));
         }
 
-        // Moves a point given ???
-        private LatLng movePoint(double angle, Position rotationCenter, Position p)
+        // Moves a point by the given angle on a circle of center rotationCenter with respect to p
+        private LatLng movePoint(double angle, Position rotationCenter, Position initialPoint)
         {
-            double xU = p.Latitude - rotationCenter.Latitude;
-            double yU = p.Longitude - rotationCenter.Longitude;
-            double xV = Math.Cos(angle) * xU - Math.Sin(angle) * yU;
-            double yV = Math.Sin(angle) * xU + Math.Cos(angle) * yU;
-            LatLng res = new LatLng(rotationCenter.Latitude + xV, rotationCenter.Longitude + yV);
-            return res;    
+            // Compute the components of the translation vector between rotationCenter and initialPoint
+            double dx = initialPoint.Latitude - rotationCenter.Latitude;
+            double dy = initialPoint.Longitude - rotationCenter.Longitude;
+
+            // Compute the moved point's position
+            double x = rotationCenter.Latitude + Math.Cos(angle) * dx - Math.Sin(angle) * dy;
+            double y = rotationCenter.Longitude + Math.Sin(angle) * dx + Math.Cos(angle) * dy;
+
+            LatLng res = new LatLng(x, y);
+
+            return res;
         }
 
         public void UpdatePolyLinePos(bool init,LatLng pos=null)
