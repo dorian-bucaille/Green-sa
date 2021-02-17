@@ -17,7 +17,7 @@ namespace GreenSa.Models.Tools.GPS_Maps
     {
         private List<Position>   routeCoordinates = new List<Position>();
 
-        //List of the significative points of the map (use to draw the blue polyline)
+        // List of the significative points of the map (use to draw the blue polyline)
         public List<Position> RouteCoordinates
         {
             get {
