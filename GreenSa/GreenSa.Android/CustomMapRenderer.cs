@@ -44,7 +44,7 @@ namespace Greensa.Droid
                 {
                     UpdatePolyLinePos(false);
                     UpdateShotTriangle();
-                    // UpdateShotCone(Math.PI / 4);
+                    UpdateShotCone(Math.PI / 4);
                 }
                 catch(Exception e) { }
             });
@@ -167,16 +167,73 @@ namespace Greensa.Droid
             polylineOptions.InvokeWidth(10f);
             polylineOptions.InvokeColor(Android.Graphics.Color.Argb(240, 255, 20, 147)); // Pink
 
+            /*
             polylineOptions.Add(userPos);
             polylineOptions.Add(conePoint);
 
             // Add the line to coneLines
             coneLines.Add(map.AddPolyline(polylineOptions));
+            */
+
+            LatLng pointO = new LatLng(25, -1.747279);
+            LatLng pointA = new LatLng(26, -1.747279);
+            LatLng pointB = new LatLng(24, -1.747279);
+            LatLng pointC = new LatLng(25, -0.747279);
+            LatLng pointD = new LatLng(25, -2.747279);
+
+            LatLng pointO2 = new LatLng(0, -1.747279);
+            LatLng pointA2 = new LatLng(-1, -1.747279);
+            LatLng pointB2 = new LatLng(1, -1.747279);
+            LatLng pointC2 = new LatLng(0, -0.747279);
+            LatLng pointD2 = new LatLng(0, -2.747279);
+
+            polylineOptions.Add(pointO);
+            polylineOptions.Add(pointA);
+            polylineOptions.Add(pointB);
+            polylineOptions.Add(pointC);
+            polylineOptions.Add(pointD);
+
+            polylineOptions.Add(pointO2);
+            polylineOptions.Add(pointA2);
+            polylineOptions.Add(pointB2);
+            polylineOptions.Add(pointC2);
+            polylineOptions.Add(pointD2);
+
+            coneLines.Add(map.AddPolyline(polylineOptions));
+
+        }
+
+        // Same as movePoint but takes into account latitude
+        private LatLng MovePointCorrected(double angle, Position rotationCenter, Position initialPoint)
+        {
+            // scale factor : 293 : 194 for lat = 48.069735
+            // 354 : 321 for lat = 25
+
+            // The average radius of Earth in meters
+            double r = 6371000;
+
+            // Convert coordinates to a three 
+
+
+            // Compute the components of the translation vector between rotationCenter and initialPoint
+            double dx = initialPoint.Latitude - rotationCenter.Latitude;
+            double dy = initialPoint.Longitude - rotationCenter.Longitude;
+
+            // Compute the moved point's position
+            double x = rotationCenter.Latitude + Math.Cos(angle) * dx - Math.Sin(angle) * dy;
+            double y = rotationCenter.Longitude + Math.Sin(angle) * dx + Math.Cos(angle) * dy;
+
+            LatLng res = new LatLng(x, y);
+
+            return res;
         }
 
         // Moves a point by the given angle on a circle of center rotationCenter with respect to p
         private LatLng movePoint(double angle, Position rotationCenter, Position initialPoint)
         {
+            // Scaling factor for vertical positions (y)
+            double factor = Math.Cos(initialPoint.Latitude);
+            
             // Compute the components of the translation vector between rotationCenter and initialPoint
             double dx = initialPoint.Latitude - rotationCenter.Latitude;
             double dy = initialPoint.Longitude - rotationCenter.Longitude;
