@@ -72,6 +72,9 @@
     <Compile Include="Models\GolfModel\GolfCourse.cs" />
     <Compile Include="Models\Tools\Partie.cs" />
     <Compile Include="Models\Exceptions\EmptyStringException.cs" />
+    <Compile Include="ViewController\Help\HelpPage.xaml.cs">
+      <DependentUpon>HelpPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewController\Test\MapsTestPage.xaml.cs">
       <DependentUpon>MapsTestPage.xaml</DependentUpon>
     </Compile>
@@ -173,6 +176,9 @@
     <Reference Include="Plugin.Permissions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Plugin.Permissions.3.0.0.12\lib\netstandard1.0\Plugin.Permissions.dll</HintPath>
     </Reference>
+    <Reference Include="SkiaSharp, Version=1.60.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SkiaSharp.1.60.0\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.dll</HintPath>
+    </Reference>
     <Reference Include="SkiaSharp.Views.Forms, Version=1.59.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SkiaSharp.Views.Forms.1.59.1.1\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.Views.Forms.dll</HintPath>
     </Reference>
@@ -208,10 +214,6 @@
     </Reference>
     <Reference Include="Xamarin.Essentials, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Essentials.1.0.1\lib\netstandard1.0\Xamarin.Essentials.dll</HintPath>
-    </Reference>
-    <Reference Include="SkiaSharp">
-      <HintPath>..\..\packages\SkiaSharp.1.60.0\lib\portable-net45+win8+wpa81+wp8\SkiaSharp.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.5.0.0.1931\lib\netstandard1.0\Xamarin.Forms.Core.dll</HintPath>
@@ -386,6 +388,13 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="ViewController\Profile\MyGames\HistoryPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="ViewController\Help\HelpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

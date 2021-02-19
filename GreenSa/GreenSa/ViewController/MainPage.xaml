@@ -17,11 +17,15 @@
                     HorizontalOptions="CenterAndExpand"
                     />
         <Label x:Name="titre" Grid.Row="0" FontSize="30" Text="GREEN'SA" FontAttributes="Bold" VerticalOptions="End" HorizontalOptions="Center" TextColor="White"/>
-        <ImageButton x:Name="engrenage" Source="engre_icon.png" BackgroundColor="Transparent"
+            <ImageButton x:Name="help" Source="help_icon.png" BackgroundColor="Transparent"
+                       HorizontalOptions="Start" VerticalOptions="Start" 
+                       HeightRequest="25" Margin="10" Clicked="OnHelpClicked"
+                       />
+            <ImageButton x:Name="engrenage" Source="engre_icon.png" BackgroundColor="Transparent"
                        HorizontalOptions="End" VerticalOptions="Start" 
                        HeightRequest="25" Margin="10" Clicked="OnOptionsClicked"
                        />
-        <Grid x:Name="boutons" Grid.Row="1" RowSpacing="8" Margin="10">
+            <Grid x:Name="boutons" Grid.Row="1" RowSpacing="8" Margin="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" x:Name="r0"/>
                 <RowDefinition Height="*" x:Name="r1"/>

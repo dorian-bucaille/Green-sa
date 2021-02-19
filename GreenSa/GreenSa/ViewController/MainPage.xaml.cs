@@ -18,6 +18,7 @@ using GreenSa.Models.Profiles;
 using GreenSa.ViewController.Test;
 using Xamarin.Forms.PlatformConfiguration;
 using GreenSa.Models.Tools;
+using GreenSa.ViewController.Help;
 
 namespace GreenSa.ViewController
 {
@@ -95,10 +96,16 @@ namespace GreenSa.ViewController
             await Navigation.PushAsync(new GolfsManager());
         }
 
-
+        // Create a new option page when user clicks the options icon
         async private void OnOptionsClicked(object sender, EventArgs e){
             //await Navigation.PushAsync(new SeeBDContent()); //A special page to view the database's content, disabled for release
             await Navigation.PushAsync(new OptionPage());
+        }
+
+        // Create a new help page when user clicks the options icon
+        async private void OnHelpClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new HelpPage());
         }
     }
 }

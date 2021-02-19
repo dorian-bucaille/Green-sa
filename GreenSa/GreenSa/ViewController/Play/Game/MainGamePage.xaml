@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:GreenSa.Models.Tools.GPS_Maps"
              xmlns:local2="clr-namespace:GreenSa.MarkupExtension"
-             xmlns:local3="clr-namespace:GreenSa.Models.ViewElements"
+             xmlns:local3="clr-namespace:GreenSa.Models.ViewElements" xmlns:controls="clr-namespace:Windows.UI.Xaml.Controls;assembly=Windows.Foundation.UniversalApiContract"
              x:Class="GreenSa.ViewController.Play.Game.MainGamePage"
              NavigationPage.HasBackButton="False"
              NavigationPage.HasNavigationBar="False">
