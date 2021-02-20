@@ -49,7 +49,7 @@
             <ImageButton x:Name="radar" Source="radar.png"
                    HorizontalOptions="Center" VerticalOptions="End"
                    Clicked="onMainButtonClicked" BackgroundColor="Transparent"/>
-            <Image x:Name="load" Source="radarWait.png"
+            <Image x:Name="load" Source="radar2.gif"
                    HorizontalOptions="Center" VerticalOptions="End"
                    BackgroundColor="Transparent"/>
 

@@ -433,6 +433,7 @@ namespace GreenSa.ViewController.Play.Game
         {
             load.IsEnabled = true;
             load.IsVisible = true;
+            load.IsAnimationPlaying = true;  // Play the GIF
             radar.IsEnabled = false;
             radar.IsVisible = false;
             ball.IsEnabled = false;
@@ -450,6 +451,7 @@ namespace GreenSa.ViewController.Play.Game
             state = 0;
             load.IsEnabled = false;
             load.IsVisible = false;
+            load.IsAnimationPlaying = false;  // Stop the GIF
             radar.IsEnabled = false;
             radar.IsVisible = false;
             ball.IsEnabled = true;
@@ -467,6 +469,7 @@ namespace GreenSa.ViewController.Play.Game
             state = 1;
             load.IsEnabled = false;
             load.IsVisible = false;
+            load.IsAnimationPlaying = false;  // Stop the GIF
             radar.IsEnabled = true;
             radar.IsVisible = true;
             ball.IsEnabled = false;
