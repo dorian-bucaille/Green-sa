@@ -9,6 +9,22 @@
             <Label Text="Ceci est la page d'aide."
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+
+            <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding topList}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Label VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                   Margin="3,15" TextColor="{Binding TextColor}" Text="{Binding PageName}"
+                                   FontFamily="{Binding FontFam}" FontSize="14">
+                                </Label>
+                            </Grid>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+            </ScrollView>
+        
+</StackLayout>
     </ContentPage.Content>
 </ContentPage>
