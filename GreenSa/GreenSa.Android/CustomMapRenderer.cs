@@ -44,7 +44,7 @@ namespace Greensa.Droid
                 {
                     UpdatePolyLinePos(false);
                     // UpdateShotTriangle();
-                    UpdateShotCone(Math.PI / 4);
+                    // UpdateShotCone(Math.PI / 4);
                 }
                 catch(Exception e) { }
             });

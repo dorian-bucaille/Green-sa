@@ -5,26 +5,28 @@
              x:Class="GreenSa.ViewController.Help.HelpPage"
              NavigationPage.HasNavigationBar="True">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Ceci est la page d'aide."
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout VerticalOptions="FillAndExpand">
+            <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                <StackLayout VerticalOptions="FillAndExpand">
+                    
+                    <Label Text="Bienvenue sur la page d'aide."
+                           VerticalOptions="CenterAndExpand" 
+                           HorizontalOptions="CenterAndExpand" />
 
-            <ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
-                <StackLayout Orientation="Horizontal" BindableLayout.ItemsSource="{Binding topList}">
-                    <BindableLayout.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Label VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
-                                   Margin="3,15" TextColor="{Binding TextColor}" Text="{Binding PageName}"
-                                   FontFamily="{Binding FontFam}" FontSize="14">
-                                </Label>
-                            </Grid>
-                        </DataTemplate>
-                    </BindableLayout.ItemTemplate>
+                    <Image Source="help1.png"
+                           HorizontalOptions="Center"/>
+
+                    <Image Source="help2.png"
+                           HorizontalOptions="Center"/>
+
+                    <Image Source="help3.png"
+                           HorizontalOptions="Center"/>
+
+                    <Image Source="help4.png"
+                           HorizontalOptions="Center"/>
+
                 </StackLayout>
             </ScrollView>
-        
-</StackLayout>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

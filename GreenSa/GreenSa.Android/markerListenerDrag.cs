@@ -42,15 +42,15 @@ namespace Greensa.Droid
 
 
             cmr.UpdatePolyLinePos(false,marker.Position);
-            cmr.UpdateShotCone(Math.PI / 4);
-            cmr.UpdateShotTriangle();
+            // cmr.UpdateShotCone(Math.PI / 4);
+            // cmr.UpdateShotTriangle();
         }
 
         public void OnMarkerDragEnd(Marker marker)
         {
             cmr.UpdatePolyLinePos(false,marker.Position);
-            cmr.UpdateShotCone(Math.PI / 4);
-            cmr.UpdateShotTriangle();
+            // cmr.UpdateShotCone(Math.PI / 4);
+            // cmr.UpdateShotTriangle();
             marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.Target));
 
         }
@@ -58,8 +58,8 @@ namespace Greensa.Droid
         public void OnMarkerDragStart(Marker marker)
         {
             cmr.UpdatePolyLinePos(false, marker.Position);
-            cmr.UpdateShotCone(Math.PI / 4);
-            cmr.UpdateShotTriangle();
+            // cmr.UpdateShotCone(Math.PI / 4);
+            // cmr.UpdateShotTriangle();
             marker.SetIcon(BitmapDescriptorFactory.FromResource(Resource.Drawable.BigTarget));
             
         }
