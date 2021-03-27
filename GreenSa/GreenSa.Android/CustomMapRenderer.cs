@@ -175,20 +175,6 @@ namespace Greensa.Droid
 
         }
 
-        // Earth radius at a given latitude, according to the WGS-84 ellipsoid [m]
-        private static double WGS84EarthRadius(double lat)
-        {
-            // Semi-axes of WGS-84 geoidal reference
-            double WGS84_a = 6378137.0; // Major semiaxis [m]
-            double WGS84_b = 6356752.3; // Minor semiaxis [m]
-            // http://en.wikipedia.org/wiki/Earth_radius
-            var An = WGS84_a * WGS84_a * Math.Cos(lat);
-            var Bn = WGS84_b * WGS84_b * Math.Sin(lat);
-            var Ad = WGS84_a * Math.Cos(lat);
-            var Bd = WGS84_b * Math.Sin(lat);
-            return Math.Sqrt((An * An + Bn * Bn) / (Ad * Ad + Bd * Bd));
-        }
-
         // !!! TODO !!! Fix this
         // Moves a point by the given angle on a circle of center rotationCenter with respect to p
         // Resources for the fix...
