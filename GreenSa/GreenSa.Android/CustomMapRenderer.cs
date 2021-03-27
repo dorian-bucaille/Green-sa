@@ -174,37 +174,29 @@ namespace Greensa.Droid
             coneLines.Add(map.AddPolyline(polylineOptions));
 
         }
-        
-        // TODO Fix this
+
+        // Earth radius at a given latitude, according to the WGS-84 ellipsoid [m]
+        private static double WGS84EarthRadius(double lat)
+        {
+            // Semi-axes of WGS-84 geoidal reference
+            double WGS84_a = 6378137.0; // Major semiaxis [m]
+            double WGS84_b = 6356752.3; // Minor semiaxis [m]
+            // http://en.wikipedia.org/wiki/Earth_radius
+            var An = WGS84_a * WGS84_a * Math.Cos(lat);
+            var Bn = WGS84_b * WGS84_b * Math.Sin(lat);
+            var Ad = WGS84_a * Math.Cos(lat);
+            var Bd = WGS84_b * Math.Sin(lat);
+            return Math.Sqrt((An * An + Bn * Bn) / (Ad * Ad + Bd * Bd));
+        }
+
+        // !!! TODO !!! Fix this
         // Moves a point by the given angle on a circle of center rotationCenter with respect to p
+        // Resources for the fix...
+        // https://stackoverflow.com/questions/238260/how-to-calculate-the-bounding-box-for-a-given-lat-lng-location
+        // https://stackoverflow.com/questions/1253499/simple-calculations-for-working-with-lat-lon-and-km-distance?noredirect=1&lq=1
+        // https://stackoverflow.com/questions/41425939/android-maps-polygonoptions-lat-and-long-value-in-km?noredirect=1&lq=1
         private LatLng MovePoint(double angle, Position rotationCenter, Position initialPoint)
         {
-            // Scaling factor for vertical positions (y)
-            // double factor = Math.Cos(rotationCenter.Latitude);
-
-            // Convert positions in km
-            double iniLat = initialPoint.Latitude * 110.574;
-            double iniLong = initialPoint.Longitude * 111.320 * Math.Cos(iniLat);
-            double rotLat = rotationCenter.Latitude * 110.574;
-            double rotLong = rotationCenter.Longitude * 111.320 * Math.Cos(rotLat);
-
-            // Compute the components of the translation vector between rotationCenter and initialPoint
-            double dx = iniLat - rotLat;
-            double dy = iniLong - rotLong;
-
-            // Compute the moved point's position
-            double x = rotLat + Math.Cos(angle) * dx - Math.Sin(angle) * dy;
-            double y = rotLong + Math.Sin(angle) * dx + Math.Cos(angle) * dy;
-
-            // Convert back positions in lat, long
-            double xLat = x / 110.574;
-            double yLong = y / (111.320 * Math.Cos(xLat));
-
-            LatLng res = new LatLng(xLat, yLong);
-
-            return res;
-
-            /*
             // Compute the components of the translation vector between rotationCenter and initialPoint
             double dx = initialPoint.Latitude - rotationCenter.Latitude;
             double dy = initialPoint.Longitude - rotationCenter.Longitude;
@@ -216,7 +208,6 @@ namespace Greensa.Droid
             LatLng res = new LatLng(x, y);
             
             return res;
-            */
         }
 
         public void UpdatePolyLinePos(bool init,LatLng pos=null)
@@ -228,7 +219,7 @@ namespace Greensa.Droid
             }
             var polylineOptions = new PolylineOptions();
             polylineOptions.Clickable(true);
-            polylineOptions.InvokeJointType(JointType.Round);//don't see the difference
+            polylineOptions.InvokeJointType(JointType.Round);  // Does not change anything
             polylineOptions.InvokeWidth(10f);
             polylineOptions.InvokeColor(0x664444FF);
 
