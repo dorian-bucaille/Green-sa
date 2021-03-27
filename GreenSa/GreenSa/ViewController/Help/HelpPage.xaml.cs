@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace GreenSa.ViewController.Help
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
 
-    // This class is used to display the help images and animations properly
+    // This class is used to display the help images
     public partial class HelpPage : ContentPage
     {
         public HelpPage()

@@ -152,7 +152,7 @@ namespace Greensa.Droid
             {
                 // DrawTriangle();
                 addConePolyline(-angle, customMap, userPos);  // Draws one part of the cone
-                // addConePolyline(angle, customMap, userPos);  // Draws the other part of the cone
+                addConePolyline(angle, customMap, userPos);  // Draws the other part of the cone
             }
         }
 
@@ -174,14 +174,15 @@ namespace Greensa.Droid
             coneLines.Add(map.AddPolyline(polylineOptions));
 
         }
-        
-        // TODO Fix this
+
+        // !!! TODO !!! Fix this
         // Moves a point by the given angle on a circle of center rotationCenter with respect to p
+        // Resources for the fix...
+        // https://stackoverflow.com/questions/238260/how-to-calculate-the-bounding-box-for-a-given-lat-lng-location
+        // https://stackoverflow.com/questions/1253499/simple-calculations-for-working-with-lat-lon-and-km-distance?noredirect=1&lq=1
+        // https://stackoverflow.com/questions/41425939/android-maps-polygonoptions-lat-and-long-value-in-km?noredirect=1&lq=1
         private LatLng MovePoint(double angle, Position rotationCenter, Position initialPoint)
         {
-            // Scaling factor for vertical positions (y)
-            // double factor = Math.Cos(rotationCenter.Latitude);
-            
             // Compute the components of the translation vector between rotationCenter and initialPoint
             double dx = initialPoint.Latitude - rotationCenter.Latitude;
             double dy = initialPoint.Longitude - rotationCenter.Longitude;
@@ -191,7 +192,7 @@ namespace Greensa.Droid
             double y = rotationCenter.Longitude + Math.Sin(angle) * dx + Math.Cos(angle) * dy;
 
             LatLng res = new LatLng(x, y);
-
+            
             return res;
         }
 
@@ -204,7 +205,7 @@ namespace Greensa.Droid
             }
             var polylineOptions = new PolylineOptions();
             polylineOptions.Clickable(true);
-            polylineOptions.InvokeJointType(JointType.Round);//don't see the difference
+            polylineOptions.InvokeJointType(JointType.Round);  // Does not change anything
             polylineOptions.InvokeWidth(10f);
             polylineOptions.InvokeColor(0x664444FF);
 
