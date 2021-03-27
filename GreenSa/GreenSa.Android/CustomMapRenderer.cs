@@ -152,7 +152,7 @@ namespace Greensa.Droid
             {
                 // DrawTriangle();
                 addConePolyline(-angle, customMap, userPos);  // Draws one part of the cone
-                // addConePolyline(angle, customMap, userPos);  // Draws the other part of the cone
+                addConePolyline(angle, customMap, userPos);  // Draws the other part of the cone
             }
         }
 
@@ -181,7 +181,30 @@ namespace Greensa.Droid
         {
             // Scaling factor for vertical positions (y)
             // double factor = Math.Cos(rotationCenter.Latitude);
-            
+
+            // Convert positions in km
+            double iniLat = initialPoint.Latitude * 110.574;
+            double iniLong = initialPoint.Longitude * 111.320 * Math.Cos(iniLat);
+            double rotLat = rotationCenter.Latitude * 110.574;
+            double rotLong = rotationCenter.Longitude * 111.320 * Math.Cos(rotLat);
+
+            // Compute the components of the translation vector between rotationCenter and initialPoint
+            double dx = iniLat - rotLat;
+            double dy = iniLong - rotLong;
+
+            // Compute the moved point's position
+            double x = rotLat + Math.Cos(angle) * dx - Math.Sin(angle) * dy;
+            double y = rotLong + Math.Sin(angle) * dx + Math.Cos(angle) * dy;
+
+            // Convert back positions in lat, long
+            double xLat = x / 110.574;
+            double yLong = y / (111.320 * Math.Cos(xLat));
+
+            LatLng res = new LatLng(xLat, yLong);
+
+            return res;
+
+            /*
             // Compute the components of the translation vector between rotationCenter and initialPoint
             double dx = initialPoint.Latitude - rotationCenter.Latitude;
             double dy = initialPoint.Longitude - rotationCenter.Longitude;
@@ -191,8 +214,9 @@ namespace Greensa.Droid
             double y = rotationCenter.Longitude + Math.Sin(angle) * dx + Math.Cos(angle) * dy;
 
             LatLng res = new LatLng(x, y);
-
+            
             return res;
+            */
         }
 
         public void UpdatePolyLinePos(bool init,LatLng pos=null)
