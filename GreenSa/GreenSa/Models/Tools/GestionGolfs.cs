@@ -36,9 +36,9 @@ namespace GreenSa.Models.GolfModel
             await connection.CreateTableAsync<GolfCourse>();
             List<GolfCourse> gfcs = (await SQLiteNetExtensionsAsync.Extensions.ReadOperations.GetAllWithChildrenAsync<GolfCourse>(connection, recursive: true));
 
-            if (gfcs.Count == 0)//if no golf courses in the datatbase
+            if (gfcs.Count == 0)  // if no golf course in the datatbase
             {
-                //parse the default golf courses of Rennes from the XML files and add them (Ressources/GolfCourses)
+                //  parse the default golf courses of Rennes from the XML files and add them (Ressources/GolfCourses)
                 gfcs = GolfXMLReader.getListGolfCourseFromXMLFiles();
                 await SQLiteNetExtensionsAsync.Extensions.WriteOperations.InsertOrReplaceAllWithChildrenAsync(connection, gfcs, true);
             }
@@ -59,9 +59,9 @@ namespace GreenSa.Models.GolfModel
             await connection.CreateTableAsync<Club>();
             clubs = (await SQLiteNetExtensionsAsync.Extensions.ReadOperations.GetAllWithChildrenAsync<Club>(connection));
 
-            if (clubs.Count == 0)//if no clubs in the datatbase
+            if (clubs.Count == 0)  // if no clubs in the database
             {
-                //parse the default clubs from the XML files and add them (Ressources/Clubs)
+                //  parse the default clubs from the XML files and add them (Ressources/Clubs)
                 clubs = GolfXMLReader.getListClubFromXMLFiles();
                 await connection.InsertAllAsync(clubs);
             }
@@ -69,7 +69,7 @@ namespace GreenSa.Models.GolfModel
         }
 
         /**
-         * Initialized the list of average distances with the ones of the clubs in parameter
+         * Initializes the list of average distances with the ones of the clubs in parameter
          * clubs : the list of clubs to compute the average distance
          */
         public async static void calculAverageAsync(List<Club> clubs)
@@ -105,13 +105,13 @@ namespace GreenSa.Models.GolfModel
             */
             Club minDiffClub = null;
             double minDiff = -1;
-            if (dUserTarget < 6.0)//if the target isn't further than 6 meters, let's advise the user to use his putter
+            if (dUserTarget < 6.0)  // if the target isn't further than 6 meters, let's advise the user to use his putter
             {
                 minDiffClub = Club.PUTTER;
             }
             else
             {
-                //Find the lowest absolute difference between all clubs average distances and the distance between the user and the target
+                // Find the lowest absolute difference between all clubs average distances and the distance between the user and the target
                 foreach (Tuple<Club, double> tuple in listAverage)
                 {
                     Club c = tuple.Item1;
