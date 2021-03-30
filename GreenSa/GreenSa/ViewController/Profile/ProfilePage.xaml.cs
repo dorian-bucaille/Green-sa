@@ -1,30 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using GreenSa.ViewController.Play;
-using GreenSa.ViewController.Option;
-using GreenSa.ViewController.MesGolfs;
-using GreenSa.ViewController.Profile;
 using GreenSa.Models.GolfModel;
 using GreenSa.Models.Profiles;
-using GreenSa.Models.ViewElements;
-using SQLite;
-using System.Collections.ObjectModel;
-using GreenSa.Persistence;
 using GreenSa.ViewController.Profile.Statistiques;
 using GreenSa.Models.Tools;
+
+// This classed is used to interact with the profile page 
 
 namespace GreenSa.ViewController.Profile
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProfilePage : ContentPage
     {
-        private SQLiteConnection DBconnection;
         private Profil LocalUser;
         private StatistiqueMainTabbedPage statPage;
 
@@ -58,18 +46,17 @@ namespace GreenSa.ViewController.Profile
             statstitle.FontSize = 19;
             boutons.Margin = new Thickness(10, 0, 10, 15);
 
-            updateLabels();
+            UpdateLabels();
         }
 
         protected override void OnAppearing()
         {
-            updateLabels();
+            UpdateLabels();
         }
 
-        /**
-         * Updates the labels describing the information of the user
-         */
-        public void updateLabels()
+
+        // Update the labels describing the information of the user
+        public void UpdateLabels()
         {
             LocalUser = StatistiquesGolf.getProfil();
             user.Text = LocalUser.Username;
@@ -85,9 +72,7 @@ namespace GreenSa.ViewController.Profile
         }
 
 
-        /**
-         * These methods are called when the corresponding button is pressed and redirects to a new page  
-         */
+        // Redirect to a new page when the corresponding button is pressed
         async private void OnClubsClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new MyClubs.ClubSelectionPage());

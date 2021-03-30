@@ -10,10 +10,10 @@ namespace GreenSa.Models.GolfModel
 {
     public class GolfCourse
     {
-        public string NameGolf { get; set; }//Name of the golf (can have several courses in one golf)
+        public string NameGolf { get; set; }  // Name of the golf (can have several courses in one golf)
 
         [PrimaryKey]
-        public string Name { get; set; }//Name of the course
+        public string Name { get; set; }  // Name of the course
 
 
         [OneToMany(CascadeOperations = CascadeOperation.All)]
