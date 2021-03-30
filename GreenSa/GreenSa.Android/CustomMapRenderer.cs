@@ -46,14 +46,14 @@ namespace Greensa.Droid
                     // UpdateShotTriangle();
                     // UpdateShotCone(Math.PI / 4);
                 }
-                catch(Exception e) { }
+                catch(Exception) { }
             });
             MessagingCenter.Subscribe<Partie>(this, "updateTheCircle", (sender) => {
                 try
                 {
                     updateCircle();
                 }
-                catch (Exception e) { }
+                catch (Exception) { }
             });
 
             MessagingCenter.Subscribe<MainGamePage, bool>(this, "updateTheCircleVisbility", (sender, visible) => {
@@ -62,7 +62,7 @@ namespace Greensa.Droid
                     setCircleVisible(visible);
 
                 }
-                catch (Exception e) { }
+                catch (Exception) { }
             });
         }
         

@@ -45,7 +45,8 @@ namespace GreenSa.ViewController.Option
             map.update();
 
             //Suscribe to get a notification about the pin that was added on the map by the user
-            MessagingCenter.Subscribe<Pin>(this, "getAddGolfMapPins", (pin) => {
+            MessagingCenter.Subscribe<Pin>(this, "getAddGolfMapPins", (pin) =>
+            {
                 this.pins.Add(pin);
                 this.SetParVisibility(true);
                 this.SetCourseNameVisibility(false);
@@ -60,7 +61,8 @@ namespace GreenSa.ViewController.Option
             if ("".Equals(cityEntry.Text))
             {
                 await this.DisplayAlert("Erreur", "Le champ spécifiant le nom du golf ne peut pas être vide", "ok");
-            } else
+            }
+            else
             {
                 var address = cityEntry.Text;
                 var locations = await Geocoding.GetLocationsAsync(address);
@@ -87,11 +89,12 @@ namespace GreenSa.ViewController.Option
                     {
                         String xmlGolfCourse = this.CreateXmlGolfCourse();
                         this.InsertGolfCourseBdd(xmlGolfCourse);
-                    } catch (EmptyStringException emptyStrException)
+                    }
+                    catch (EmptyStringException emptyStrException)
                     {
                         await this.DisplayAlert("Erreur", "La communication avec la base de données a échoué", "Ok");
                     }
-                    
+
                 }
             }
             else
@@ -115,7 +118,8 @@ namespace GreenSa.ViewController.Option
                     NinePinsCourseNameManagement();
                     this.SetParVisibility(false);
                 }
-            } else
+            }
+            else
             {
                 await this.DisplayAlert("Erreur de suppression", "Aucun trou à supprimer", "Ok");
             }

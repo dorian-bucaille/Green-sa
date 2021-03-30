@@ -153,7 +153,7 @@ namespace GreenSa.ViewController.Play.Game
                 }
 
                 // If GPS is not available, display a message
-                catch (Exception e)
+                catch (Exception)
                 {
                     await DisplayAlert("GPS non disponible", "La localisation GPS n'est pas disponible. Assurez-vous de l'avoir activée dans les paramètres.", "OK");
                     await Navigation.PopToRootAsync(); // Come back to root to avoid any problem in the game flow
