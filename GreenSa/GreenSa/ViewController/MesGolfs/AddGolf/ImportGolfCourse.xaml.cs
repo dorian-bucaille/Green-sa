@@ -3,9 +3,7 @@ using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
-using GreenSa.Models.Tools.GPS_Maps;
 using Xamarin.Forms.Maps;
-using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Text;
 using GreenSa.Models.GolfModel;
@@ -14,8 +12,8 @@ using GreenSa.Persistence;
 using System.Reflection;
 using SQLite;
 using GreenSa.Models.Exceptions;
-//using Xamarin.Forms.Maps;
-//using Xamarin.Forms.GoogleMaps;
+
+// Class used to import golf courses
 
 namespace GreenSa.ViewController.Option
 {
@@ -23,7 +21,7 @@ namespace GreenSa.ViewController.Option
     public partial class ImportGolfCourse : ContentPage
     {
 
-        //list of the current pins placed on the map
+        // List of the current pins placed on the map
         List<Pin> pins;
 
         public ImportGolfCourse()
@@ -31,7 +29,7 @@ namespace GreenSa.ViewController.Option
             InitializeComponent();
             this.pins = new List<Pin>();
 
-            //Init some content on the view
+            // Init some content on the view
             this.validPar.BorderColor = Color.FromHex("0C5E11");
             this.validPar.BorderWidth = 2;
             this.deletePin.BorderColor = Color.FromHex("0C5E11");
@@ -44,23 +42,24 @@ namespace GreenSa.ViewController.Option
             this.SetCourseNameVisibility(false);
             map.update();
 
-            //Suscribe to get a notification about the pin that was added on the map by the user
-            MessagingCenter.Subscribe<Pin>(this, "getAddGolfMapPins", (pin) => {
+            // Suscribe to get a notification about the pin that was added on the map by the user
+            MessagingCenter.Subscribe<Pin>(this, "getAddGolfMapPins", (pin) =>
+            {
                 this.pins.Add(pin);
                 this.SetParVisibility(true);
                 this.SetCourseNameVisibility(false);
             });
         }
 
-        /** 
-         * This method is called when the button to localize on the map is pressed
-         */
+
+        // Localize the golf based on address when the localize button is pressed
         private async void OnLocalizeClick(object sender, EventArgs e)
         {
             if ("".Equals(cityEntry.Text))
             {
-                await this.DisplayAlert("Erreur", "Le champ spécifiant le nom du golf ne peut pas être vide", "ok");
-            } else
+                await this.DisplayAlert("Erreur", "Le champ spécifiant le nom du golf ne peut pas être vide", "Ok");
+            }
+            else
             {
                 var address = cityEntry.Text;
                 var locations = await Geocoding.GetLocationsAsync(address);
@@ -72,42 +71,41 @@ namespace GreenSa.ViewController.Option
             }
         }
 
-        /**
-         * This method is called when the button to create a new golf course is pressed
-         */
+
+        // Create a new golf course when the create button is pressed
         private async void OnCreateCourseClick(object sender, EventArgs e)
         {
 
             if (this.pins.Count == 9 || this.pins.Count == 18)
             {
-                var confirmDelete = await this.DisplayAlert("Création du parcours", "Voulez vous créer ce parcours ?", "Oui", "Non");
+                var confirmDelete = await this.DisplayAlert("Création du parcours", "Voulez-vous créer ce parcours ?", "Oui", "Non");
                 if (confirmDelete)
                 {
                     try
                     {
                         String xmlGolfCourse = this.CreateXmlGolfCourse();
                         this.InsertGolfCourseBdd(xmlGolfCourse);
-                    } catch (EmptyStringException emptyStrException)
-                    {
-                        await this.DisplayAlert("Erreur", "La communication avec la base de données a échoué", "Ok");
                     }
-                    
+                    catch (EmptyStringException)
+                    {
+                        await this.DisplayAlert("Erreur", "Le nom du golf doit être renseigné", "Ok");
+                    }
+
                 }
             }
             else
             {
-                await this.DisplayAlert("Erreur", "Un parcours ne peut être que de 9 ou 18 trous", "Ok");
+                await this.DisplayAlert("Erreur", "Un parcours doit contenir au moins un trou", "Ok");
             }
         }
 
-        /** 
-         * This method is called when the button to delete the last placed hole pin is pressed
-         */
+
+        // Delete the last placed hole pin
         private async void OnDeletePinClick(object sender, EventArgs e)
         {
             if (this.pins.Any())
             {
-                var confirmDelete = await this.DisplayAlert("Suppression du dernier trou", "Voulez vous supprimer le trou n°" + this.pins.Count + " ?", "Oui", "Non");
+                var confirmDelete = await this.DisplayAlert("Suppression du dernier trou", "Voulez-vous supprimer le trou n°" + this.pins.Count + " ?", "Oui", "Non");
                 if (confirmDelete)
                 {
                     this.pins.RemoveAt(this.pins.Count - 1);//remove in the common list
@@ -115,20 +113,20 @@ namespace GreenSa.ViewController.Option
                     NinePinsCourseNameManagement();
                     this.SetParVisibility(false);
                 }
-            } else
+            }
+            else
             {
                 await this.DisplayAlert("Erreur de suppression", "Aucun trou à supprimer", "Ok");
             }
         }
 
-        /** 
-         * This method is called when the button to delete all hole pins is pressed
-         */
+
+        // Delete every single placed hole pin
         private async void OnDeleteAllPinsClick(object sender, EventArgs e)
         {
             if (this.pins.Any())
             {
-                var confirmDelete = await this.DisplayAlert("Suppression de tous les trous", "Voulez vous supprimer tous les trous ?", "Oui", "Non");
+                var confirmDelete = await this.DisplayAlert("Suppression de tous les trous", "Voulez-vous supprimer tous les trous ?", "Oui", "Non");
                 if (confirmDelete)
                 {
                     this.ManageAllPinsDelete();
@@ -140,9 +138,7 @@ namespace GreenSa.ViewController.Option
             }
         }
 
-        /** 
-         * This method is called when the button to validate the hole is pressed
-         */
+        // Validate hole addition to golf course
         private void OnValidParClick(object sender, EventArgs e)
         {
             if ("".Equals(this.golfParEntry.Text))
@@ -152,7 +148,9 @@ namespace GreenSa.ViewController.Option
             else
             {
                 int par = Convert.ToInt32(this.golfParEntry.Text);
-                this.pins[this.pins.Count - 1].Id = par;//Given that the pin ID isn't used, let's use it to store the par
+
+                this.pins[this.pins.Count - 1].Id = par;  // Given that the pin ID isn't used, let's use it to store the par (obsolete)
+
                 try
                 {
                     MessagingCenter.Send<Object>(par, "validPar");
@@ -174,10 +172,8 @@ namespace GreenSa.ViewController.Option
             }
         }
 
-        /** 
-         * Creates an xml string describing the golf course whose data are specified in this pane by the user
-         * return this xml string
-         */
+
+        // Return the XML string describing the golf course which data is specified in this pane by the user
         private String CreateXmlGolfCourse()
         {
             if ("".Equals(this.cityEntry.Text))
@@ -190,7 +186,7 @@ namespace GreenSa.ViewController.Option
             }
             else
             {
-                //see Ressources/GolfCourses for a more understandable patern
+                // See Ressources/GolfCourses for a more understandable pattern
                 StringBuilder xmlGolfCourse = new StringBuilder("<GolfCourse>");
                 xmlGolfCourse.Append("<Name>" + this.golfNameEntry.Text + "</Name>");
                 xmlGolfCourse.Append("<NbTrous>" + this.pins.Count + "</NbTrous>");
@@ -199,7 +195,7 @@ namespace GreenSa.ViewController.Option
                 foreach (Pin hole in this.pins)
                 {
                     xmlGolfCourse.Append("<Trou>");
-                    xmlGolfCourse.Append("<par>" + hole.Id + "</par>");//hole.Id is used to store the hole's par
+                    xmlGolfCourse.Append("<par>" + hole.Id + "</par>");  // hole.Id is used to store the hole's par (obsolete)
                     xmlGolfCourse.Append("<lat>" + hole.Position.Latitude + "</lat>");
                     xmlGolfCourse.Append("<lng>" + hole.Position.Longitude + "</lng>");
                     xmlGolfCourse.Append("</Trou>");
@@ -211,10 +207,8 @@ namespace GreenSa.ViewController.Option
 
         }
 
-        /** 
-         * Inserts a golf course in the database from an xml string describing the golf course
-         * xmlGolfCourse : the xml string describing the golf course
-         */
+
+        // Insert a golf course in the database from its XML string
         public void InsertGolfCourseBdd(String xmlGolfCourse)
         {
             GolfCourse gc;
@@ -245,22 +239,18 @@ namespace GreenSa.ViewController.Option
             }
         }
 
-        /** 
-         * Manages the delete of all the pins currently placed on the map
-         */
+
+        // Manage the deletion of all the pins currently placed on the map
         private void ManageAllPinsDelete()
         {
             this.pins.Clear();
-            MessagingCenter.Send<Object>(this, "deleteAllPins");//send a message to delete all pins from the map
+            MessagingCenter.Send<Object>(this, "deleteAllPins");  // Dend a message to delete all pins from the map
             this.SetCourseNameVisibility(false);
             this.SetParVisibility(false);
         }
 
 
-        /** 
-         * Sets the visibility to the golf course name input area
-         * isVisible : true is it has to be visible, false otherwise
-         */
+        // Set the visibility to the golf course name input area
         private void SetCourseNameVisibility(Boolean isVisible)
         {
             golfNameLabel.IsVisible = isVisible;
@@ -268,10 +258,7 @@ namespace GreenSa.ViewController.Option
         }
 
 
-        /** 
-         * Sets the visibility to the par validation input area
-         * isVisible : true is it has to be visible, false otherwise
-         */
+        // Set the visibility to the par validation input area
         private void SetParVisibility(Boolean isVisible)
         {
             golfParLabel.Text = "Par du trou n°" + this.pins.Count + " :";
@@ -280,15 +267,19 @@ namespace GreenSa.ViewController.Option
             validPar.IsVisible = isVisible;
         }
 
-        /** 
-         * Sets visible the golf course name input area if nine pins are placed on the map, not visible otherwise
-         */
+
+        // Set visible the golf course name input area if 9 or 18 pins are placed on the map, not visible otherwise
         private void NinePinsCourseNameManagement()
         {
             if (this.pins.Count == 9)
             {
                 this.SetCourseNameVisibility(true);
                 this.golfNameEntry.Text = "9 trous de ";
+            }
+            else if (this.pins.Count == 18)
+            {
+                this.SetCourseNameVisibility(true);
+                this.golfNameEntry.Text = "18 trous de ";
             }
             else
             {

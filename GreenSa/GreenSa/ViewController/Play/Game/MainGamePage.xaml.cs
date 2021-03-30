@@ -153,7 +153,7 @@ namespace GreenSa.ViewController.Play.Game
                 }
 
                 // If GPS is not available, display a message
-                catch (Exception e)
+                catch (Exception)
                 {
                     await DisplayAlert("GPS non disponible", "La localisation GPS n'est pas disponible. Assurez-vous de l'avoir activée dans les paramètres.", "OK");
                     await Navigation.PopToRootAsync(); // Come back to root to avoid any problem in the game flow
@@ -177,7 +177,7 @@ namespace GreenSa.ViewController.Play.Game
                 }
 
                 // If wind is not available, display a message
-                catch (Exception e)
+                catch (Exception)
                 {
                     await DisplayAlert("Vent non disponible", "L'information concernant le vent n'est pas disponible.", "OK");
                 }
@@ -219,7 +219,7 @@ namespace GreenSa.ViewController.Play.Game
                 forceVent.Text = windInfo.strength + " km/h";
                 await windImg.RotateTo(90 + windInfo.direction);
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }

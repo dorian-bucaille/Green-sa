@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
-using Xamarin.Forms.Maps;
-using static GreenSa.Models.Tools.GPS_Maps.CustomMap;
+﻿using Xamarin.Forms.Maps;
 
 namespace GreenSa.Models.Tools.GPS_Maps
 {
@@ -22,8 +14,6 @@ namespace GreenSa.Models.Tools.GPS_Maps
         public static string USER = "USER";
 
         public string type { get; set; }
-
-        private CustomMap map;
 
         public new Position Position {
             get {return base.Position;}

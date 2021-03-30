@@ -1,9 +1,5 @@
 ﻿using SQLite;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GreenSa.Models.Tools
 {
@@ -14,7 +10,8 @@ namespace GreenSa.Models.Tools
         {
             get
             { return X + ";" + Y; }
-            set {
+            set
+            {
                 string[] splited = value.Split(';');
                 X = Double.Parse(splited[0]);
                 Y = Double.Parse(splited[1]);
@@ -32,12 +29,17 @@ namespace GreenSa.Models.Tools
 
         public override string ToString()
         {
-            return " ("+X+";"+Y+")";
+            return " (" + X + ";" + Y + ")";
         }
 
         public override bool Equals(object obj)
         {
-            return obj is MyPosition && ((MyPosition)obj).X == X && ((MyPosition)obj).Y==Y;
+            return obj is MyPosition && ((MyPosition)obj).X == X && ((MyPosition)obj).Y == Y;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
     }
 }

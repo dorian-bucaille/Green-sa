@@ -23,12 +23,12 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="4" Text="{Binding Name}" TextColor="Black" Font="Medium" VerticalTextAlignment="Center" />
-                                <Image Source="ball.png" Grid.Row="0" Grid.Column="4" Opacity="1">
+                                <Image Source="share.png" Grid.Row="0" Grid.Column="4" Scale="0.6">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer CommandParameter="{Binding Name}" Tapped="OnGolfTapped"/>
                                     </Image.GestureRecognizers>
                                 </Image>
-                                <Image Source="croix_suppression.png" Grid.Row="0" Grid.Column="5">
+                                <Image Source="trash.png" Grid.Row="0" Grid.Column="5" Scale="0.6">
                                     <Image.GestureRecognizers>
                                         <TapGestureRecognizer CommandParameter="{Binding Name}" Tapped="DeleteGolfCourse"/>
                                     </Image.GestureRecognizers>

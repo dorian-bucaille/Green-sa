@@ -76,7 +76,6 @@ namespace GreenSa.Models.Tools.Services
                     }
                 }
             }
-            return null;
         }
 
 

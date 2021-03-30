@@ -568,6 +568,12 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\help4.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\share.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\trash.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -725,7 +731,7 @@
   <Import Project="..\..\packages\Xamarin.AndroidX.Palette.1.0.0.6\build\monoandroid90\Xamarin.AndroidX.Palette.targets" Condition="Exists('..\..\packages\Xamarin.AndroidX.Palette.1.0.0.6\build\monoandroid90\Xamarin.AndroidX.Palette.targets')" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties TriggeredFromHotReload="False" />
+      <UserProperties XamarinHotReloadXFormsNugetUpgradeInfoBarGreenSaAndroidHideInfoBar="True" TriggeredFromHotReload="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
