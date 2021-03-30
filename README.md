@@ -1,3 +1,7 @@
+<p align="center">
+  <img align="center" src="https://github.com/dorian-bucaille/Green-sa/blob/Fusion/GreenSa/GreenSa.Android/Resources/drawable/icon.png?raw=true" alt="Logo Green'Sa">
+</p>
+
 # Green'Sa
 Green'Sa est une application mobile ayant pour but d'analyser les performances des golfeurs afin de les conseiller dans leurs plans de jeu.
 
@@ -7,11 +11,17 @@ Green'Sa est une application mobile ayant pour but d'analyser les performances d
 - Historique de partie éditable
 - Partage de parcours
 - Ajout de golfs
+- Corriger les erreurs de compilation
+
+**Ce qui est en cours de développement**
+- Interface web pour ajouter des golfs/plan de jeu via un PC
+- Affichage d'un cône de tir selon les statistiques du joueur
+- Commentaires dans le code
 
 **Ce qu'il reste à faire**
+- Déploiement sur le Play Store
 - Réduction de la consommation de batterie
-- Interface web pour ajouter des golfs/plan de jeu via un PC
-- Corriger erreurs
+- Portabilité sur appareils iOS
 
 # Installation et configuration du projet
 
@@ -172,7 +182,7 @@ ___Sauvegardez les propriétés (ctrl+s).___
 Une fois le fichier téléchargé, il suffit de l'ouvrir pour lancer le processus d'installation.
 
 **Green'Sa pour Android**
-Lien de téléchargement : [com.insaRennes.GreenSa.apk](https://drive.google.com/open?id=1--RuDBP6sxGtZDp6IJAEohftJb-Fe5W0)
+Lien de téléchargement : v1.3 [com.insaRennes.GreenSa.apk](https://drive.google.com/file/d/1PWJyEwUSq66o4bZevBssXxXy_8RAXgmv/view?usp=sharing)
 
 **Green'Sa pour iOS**
 Non disponible pour le moment.
