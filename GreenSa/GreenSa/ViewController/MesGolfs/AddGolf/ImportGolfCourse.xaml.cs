@@ -12,6 +12,7 @@ using GreenSa.Persistence;
 using System.Reflection;
 using SQLite;
 using GreenSa.Models.Exceptions;
+using System.Globalization;
 
 // Class used to import golf courses
 
@@ -184,12 +185,15 @@ namespace GreenSa.ViewController.Option
                 xmlGolfCourse.Append("<NbTrous>" + this.pins.Count + "</NbTrous>");
                 xmlGolfCourse.Append("<NomGolf>" + this.cityEntry.Text + "</NomGolf>");
                 xmlGolfCourse.Append("<Coordinates>");
+
+                CultureInfo format = new CultureInfo("en-US");  // Used to write latitude and longitude with '.' as decimal separator (default is ',' which is not SQL-friendly)
+
                 foreach (Pin hole in this.pins)
                 {
                     xmlGolfCourse.Append("<Trou>");
                     xmlGolfCourse.Append("<par>" + hole.MarkerId + "</par>");  // hole.MarkerId is used to store the hole's par
-                    xmlGolfCourse.Append("<lat>" + hole.Position.Latitude + "</lat>");
-                    xmlGolfCourse.Append("<lng>" + hole.Position.Longitude + "</lng>");
+                    xmlGolfCourse.Append("<lat>" + hole.Position.Latitude.ToString("G", format) + "</lat>");
+                    xmlGolfCourse.Append("<lng>" + hole.Position.Longitude.ToString("G", format) + "</lng>");
                     xmlGolfCourse.Append("</Trou>");
                 }
                 xmlGolfCourse.Append("</Coordinates>");
