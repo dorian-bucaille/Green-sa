@@ -22,7 +22,7 @@ namespace GreenSa.ViewController.Option
     {
 
         // List of the current pins placed on the map
-        List<Pin> pins;
+        readonly List<Pin> pins;
 
         public ImportGolfCourse()
         {
@@ -110,7 +110,7 @@ namespace GreenSa.ViewController.Option
                 {
                     this.pins.RemoveAt(this.pins.Count - 1);//remove in the common list
                     MessagingCenter.Send<Object>(this, "deleteLastPin");
-                    NinePinsCourseNameManagement();
+                    PinsCourseNameManagement();
                     this.SetParVisibility(false);
                 }
             }
@@ -143,13 +143,13 @@ namespace GreenSa.ViewController.Option
         {
             if ("".Equals(this.golfParEntry.Text))
             {
-                this.DisplayAlert("Erreur", "Le champ spécifiant le par du trou ne peut pas être vide", "ok");
+                this.DisplayAlert("Erreur", "Le champ spécifiant le par du trou ne peut pas être vide", "Ok");
             }
             else
             {
                 int par = Convert.ToInt32(this.golfParEntry.Text);
 
-                this.pins[this.pins.Count - 1].Id = par;  // Given that the pin ID isn't used, let's use it to store the par (obsolete)
+                this.pins[this.pins.Count - 1].MarkerId = par;  // Given that the pin MarkerId isn't used, let's use it to store the par
 
                 try
                 {
@@ -157,18 +157,10 @@ namespace GreenSa.ViewController.Option
                 }
                 catch (TargetInvocationException exception)
                 {
-                    this.DisplayAlert("OnValidParClick", exception.InnerException.StackTrace, "ok");
+                    this.DisplayAlert("OnValidParClick", exception.InnerException.StackTrace, "Ok");
                 }
                 this.SetParVisibility(false);
-                if (this.pins.Count == 18)
-                {
-                    this.golfNameEntry.Text = "18 trous de ";
-                    this.SetCourseNameVisibility(true);
-                }
-                else
-                {
-                    NinePinsCourseNameManagement();
-                }
+                PinsCourseNameManagement();
             }
         }
 
@@ -195,7 +187,7 @@ namespace GreenSa.ViewController.Option
                 foreach (Pin hole in this.pins)
                 {
                     xmlGolfCourse.Append("<Trou>");
-                    xmlGolfCourse.Append("<par>" + hole.Id + "</par>");  // hole.Id is used to store the hole's par (obsolete)
+                    xmlGolfCourse.Append("<par>" + hole.MarkerId + "</par>");  // hole.MarkerId is used to store the hole's par
                     xmlGolfCourse.Append("<lat>" + hole.Position.Latitude + "</lat>");
                     xmlGolfCourse.Append("<lng>" + hole.Position.Longitude + "</lng>");
                     xmlGolfCourse.Append("</Trou>");
@@ -204,7 +196,6 @@ namespace GreenSa.ViewController.Option
                 xmlGolfCourse.Append("</GolfCourse>");
                 return xmlGolfCourse.ToString();
             }
-
         }
 
 
@@ -269,12 +260,12 @@ namespace GreenSa.ViewController.Option
 
 
         // Set visible the golf course name input area if 9 or 18 pins are placed on the map, not visible otherwise
-        private void NinePinsCourseNameManagement()
+        private void PinsCourseNameManagement()
         {
             if (this.pins.Count == 9)
             {
-                this.SetCourseNameVisibility(true);
                 this.golfNameEntry.Text = "9 trous de ";
+                this.SetCourseNameVisibility(true);
             }
             else if (this.pins.Count == 18)
             {
