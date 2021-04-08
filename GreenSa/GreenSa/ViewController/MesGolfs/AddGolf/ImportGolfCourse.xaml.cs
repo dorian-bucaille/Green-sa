@@ -179,7 +179,7 @@ namespace GreenSa.ViewController.Option
             }
             else
             {
-                // See Ressources/GolfCourses for a more understandable pattern
+                // See Ressources/GolfCourses for a more understandable pattern 
                 StringBuilder xmlGolfCourse = new StringBuilder("<GolfCourse>");
                 xmlGolfCourse.Append("<Name>" + this.golfNameEntry.Text + "</Name>");
                 xmlGolfCourse.Append("<NbTrous>" + this.pins.Count + "</NbTrous>");
