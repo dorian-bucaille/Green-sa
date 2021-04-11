@@ -135,6 +135,15 @@ namespace GreenSa.ViewController.Play.Game
             MessagingCenter.Subscribe<System.Object>(this, CustomPin.UPDATEDMESSAGE_CIRCLE, (sender) => {
                 updateDistance();
             });
+
+            // When the target pin is moved => update the confidence cursor position
+            MessagingCenter.Subscribe<CustomPin>(this, CustomPin.UPDATEDMESSAGE, (sender) => {
+                updateConfidence();
+            });
+            MessagingCenter.Subscribe<System.Object>(this, CustomPin.UPDATEDMESSAGE_CIRCLE, (sender) => {
+                updateConfidence();
+            });
+
             //this message details the state of the game 0 if hole isn't finished, 1 otherwise and 2 if the game is finished
             MessagingCenter.Subscribe<HoleFinishedPage, int>(this, "ReallyFinit", (sender, val) => {
                 holFini = val;
@@ -249,15 +258,17 @@ namespace GreenSa.ViewController.Play.Game
         private void updateConfidence(bool OnAppearing = false)
         {
             partie.updateUICircle();
-            var distUsertarget = map.getDistanceUserTarget();
 
-            // If the target has moved more than 5 meters or if the page was just refreshed
-            if (Math.Abs(dUserTarget - dUserTargetTemp) > 5 || OnAppearing)
-            {
-                Club c = getCurrentClub();
-                double avg = GestionGolfs.getAvg(c);
-                double percentage = distUsertarget / avg;
-            }
+            dUserTarget = map.getDistanceUserTarget();  // Update class user to target distance
+            var distUsertarget = map.getDistanceUserTarget();  // User to target distance
+
+            Club c = getCurrentClub();
+            double avg = GestionGolfs.getAvg(c);  // The average distance with the current club
+            double percentage = distUsertarget / avg;
+            int mar = Convert.ToInt32(-250 * percentage);  // The vertical margin to apply to confidenceCursor
+
+            confidenceCursor.Margin = new Thickness(7, mar, 0, 0);  // mar=-250 : best confidence. Lower : too close, greater : too far away.
+
         }
 
         /**
