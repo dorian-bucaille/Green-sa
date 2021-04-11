@@ -264,7 +264,7 @@ namespace GreenSa.ViewController.Play.Game
 
             Club c = getCurrentClub();
             double avg = GestionGolfs.getAvg(c);  // The average distance with the current club
-            double percentage = distUsertarget / avg;
+            double percentage = distUsertarget / avg;  // S/O Alexandre Tschoumi for the mathematical formula
             int mar = Convert.ToInt32(-250 * percentage);  // The vertical margin to apply to confidenceCursor
 
             confidenceCursor.Margin = new Thickness(7, mar, 0, 0);  // mar=-250 : best confidence. Lower : too close, greater : too far away.
