@@ -1,31 +1,26 @@
 ﻿using GreenSa.Models.GolfModel;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
 namespace GreenSa.Models.Tools.GPS_Maps
 {
-    public class CustomMap : Map , INotifyPropertyChanged
+    public class CustomMap : Map, INotifyPropertyChanged
     {
-        private List<Position>   routeCoordinates = new List<Position>();
+        private List<Position> routeCoordinates = new List<Position>();
 
         // List of the significative points of the map (use to draw the blue polyline)
         public List<Position> RouteCoordinates
         {
-            get {
+            get
+            {
                 routeCoordinates = new List<Position>();
                 routeCoordinates.Add(UserPin.Position);
                 routeCoordinates.Add(TargetPin.Position);
                 routeCoordinates.Add(HolePin.Position);
-                return routeCoordinates; 
+                return routeCoordinates;
             }
             set
             {
@@ -34,16 +29,19 @@ namespace GreenSa.Models.Tools.GPS_Maps
 
             }
         }
-        public List<CustomPin> CustomPins{
-            get{
+        public List<CustomPin> CustomPins
+        {
+            get
+            {
                 List<CustomPin> l = new List<CustomPin>();
                 l.Add(UserPin);
                 l.Add(TargetPin);
                 l.Add(HolePin);
                 return l;
             }
-            set{
-                
+            set
+            {
+
             }
         }
         public CustomPin UserPin { get => userPin; set => userPin = value; }
@@ -57,8 +55,9 @@ namespace GreenSa.Models.Tools.GPS_Maps
         public CustomMap()
         {
             //message which come from the markerListenerDrag (android only, ios set direclty)
-            //when the target pin is moved =>update the model position of the target
-            MessagingCenter.Subscribe<CustomPin>(this, CustomPin.UPDATEDMESSAGE, (sender) => {
+            //when the target pin is moved => update the model position of the target
+            MessagingCenter.Subscribe<CustomPin>(this, CustomPin.UPDATEDMESSAGE, (sender) =>
+            {
                 TargetPin.Position = sender.Position;
             });
 
@@ -83,7 +82,7 @@ namespace GreenSa.Models.Tools.GPS_Maps
                 Label = "Trou"
             };
         }
-        
+
         public CustomMap(MapSpan region) : base(region)
         {
             RouteCoordinates = new List<Position>();
@@ -93,7 +92,7 @@ namespace GreenSa.Models.Tools.GPS_Maps
         }
 
         /**
-         * Sets the user pin to the given position and update its label with the bumber of shots currently performed
+         * Set the user pin to the given position and update its label with the number of shots currently performed
          * pos : the new position
          * nbShot : the number of shots
          */
@@ -113,19 +112,19 @@ namespace GreenSa.Models.Tools.GPS_Maps
         public void setHolePosition(Hole hole)
         {
             HolePin.Position = new Position(hole.Position.X, hole.Position.Y);
-            HolePin.Label = "Par "+hole.Par;
+            HolePin.Label = "Par " + hole.Par;
         }
 
         /**
-         * Gets the default target position which is the middle of the user and the hole
+         * Get the default target position which is the middle of the user and the hole
          */
         public Position getDefaultTargetPosition()
         {
-            return new Position((UserPin.Position.Latitude + HolePin.Position.Latitude )/2, (UserPin.Position.Longitude + HolePin.Position.Longitude)/2);
+            return new Position((UserPin.Position.Latitude + HolePin.Position.Latitude) / 2, (UserPin.Position.Longitude + HolePin.Position.Longitude) / 2);
         }
 
         /**
-         * Updates the map
+         * Update the map
          */
         public void update()
         {
@@ -156,7 +155,7 @@ namespace GreenSa.Models.Tools.GPS_Maps
         public double getDistanceUserHole()
         {
             return DistanceTo(UserPin.Position.Latitude, UserPin.Position.Longitude,
-                                HolePin.Position.Latitude, HolePin.Position.Longitude,"M");
+                                HolePin.Position.Latitude, HolePin.Position.Longitude, "M");
         }
 
         public double getDistanceTargetHole()
@@ -172,7 +171,7 @@ namespace GreenSa.Models.Tools.GPS_Maps
         }
 
         /**
-         * Computes the distance between two positions in a specific unit
+         * Compute the distance between two positions in a specific unit
          * lat1 : the latitude of the first position
          * lon1 : the longitude of the first position
          * lat2 : the latitude of the second position
@@ -203,7 +202,7 @@ namespace GreenSa.Models.Tools.GPS_Maps
         }
 
         /**
-         * Sets the target pin movable
+         * Set the target pin movable
          */
         internal void setTargetMovable()
         {
@@ -213,7 +212,7 @@ namespace GreenSa.Models.Tools.GPS_Maps
         }
 
         /**
-         * Locks the target pin
+         * Lock the target pin
          */
         public void lockTarget()
         {
@@ -222,7 +221,7 @@ namespace GreenSa.Models.Tools.GPS_Maps
         }
 
         /**
-         * Wraps the user pin postion in a MyPosition object
+         * Wrap the user pin position in a MyPosition object
          */
         internal MyPosition getUserPosition()
         {

@@ -1,29 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Xamarin.Forms.Maps.Android;
 using Xamarin.Forms.Maps;
 using Android.Gms.Maps.Model;
 using Android.Gms.Maps;
-using static Android.Gms.Maps.GoogleMap;
 using Xamarin.Forms;
 using GreenSa.Models.Tools.GPS_Maps;
 using GreenSa.Models.Tools;
 using Greensa.Droid;
-using System.Collections.ObjectModel;
 using GreenSa.Models.GolfModel;
 using GreenSa.ViewController.Play.Game;
-
-using Geodesy;
-using System.Threading;
 
 [assembly: ExportRenderer(typeof(CustomMap), typeof(CustomMapRenderer))]
 namespace Greensa.Droid
@@ -97,7 +84,7 @@ namespace Greensa.Droid
             map.UiSettings.MyLocationButtonEnabled = false;
         }
 
-
+        // Creates a marker
         protected override MarkerOptions CreateMarker(Pin pin)
         {
             var marker = base.CreateMarker(pin);

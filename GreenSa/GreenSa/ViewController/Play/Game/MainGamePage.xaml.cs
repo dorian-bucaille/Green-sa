@@ -5,15 +5,11 @@ using GreenSa.Models.Tools.GPS_Maps;
 using GreenSa.Models.Tools.Services;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
-using Xamarin.Essentials;
 using GreenSa.Models.Profiles;
 
 
@@ -89,6 +85,27 @@ namespace GreenSa.ViewController.Play.Game
             cardBackground.WidthRequest = MainPage.responsiveDesign(50);
             cardBackground.CornerRadius = 100;
             cardBackground.BackgroundColor = Color.FromRgba(0, 0, 0, 0.5);
+
+            // Responsive design for confidenceRectangle
+            confidenceRectangle.HeightRequest = MainPage.responsiveDesign(200);
+            confidenceRectangle.WidthRequest = MainPage.responsiveDesign(50);
+
+            // Responsive design for confidenceCursor
+            confidenceCursor.HeightRequest = MainPage.responsiveDesign(5);
+            confidenceCursor.WidthRequest = MainPage.responsiveDesign(50);
+
+            // Responsive design for tooFarZone and tooCloseZone
+            tooFarZone.HeightRequest = tooCloseZone.HeightRequest = MainPage.responsiveDesign(45);
+            tooFarZone.WidthRequest = tooCloseZone.WidthRequest = MainPage.responsiveDesign(40);
+
+            // Responsive design for mehFarZone and mehCloseZone
+            mehFarZone.HeightRequest = mehCloseZone.HeightRequest = MainPage.responsiveDesign(32);
+            mehFarZone.WidthRequest = mehCloseZone.WidthRequest = MainPage.responsiveDesign(40);
+
+            // Responsive design for goodZone
+            goodZone.HeightRequest = MainPage.responsiveDesign(40);
+            goodZone.WidthRequest = MainPage.responsiveDesign(40);
+
             score.HeightRequest = MainPage.responsiveDesign(100);
             score.WidthRequest = MainPage.responsiveDesign(100);
 
@@ -226,6 +243,24 @@ namespace GreenSa.ViewController.Play.Game
         }
 
         /**
+          * Update the confidence cursor position
+          * OnAppearing : true if the method is called in the OnAppearing method, false otherwise
+          */
+        private void updateConfidence(bool OnAppearing = false)
+        {
+            partie.updateUICircle();
+            var distUsertarget = map.getDistanceUserTarget();
+
+            // If the target has moved more than 5 meters or if the page was just refreshed
+            if (Math.Abs(dUserTarget - dUserTargetTemp) > 5 || OnAppearing)
+            {
+                Club c = getCurrentClub();
+                double avg = GestionGolfs.getAvg(c);
+                double percentage = distUsertarget / avg;
+            }
+        }
+
+        /**
          * Updates the distances on the top right hand corner of the screen
          * OnAppearing : true if the method is called in the OnAppearing method, false otherwise
          */
@@ -237,7 +272,7 @@ namespace GreenSa.ViewController.Play.Game
             distTrou.Text = string.Format("{0:0.0}", map.getDistanceUserHole()) + "m";
             var distUsertarget = map.getDistanceUserTarget();
             var distTargetHole = map.getDistanceTargetHole();
-            distTarget.Text = string.Format("{0:0.0}", distUsertarget) + " + " + string.Format("{0:0.0}", distTargetHole) + "m";
+            distTarget.Text = string.Format("{0:0.0}", distUsertarget) + "m + " + string.Format("{0:0.0}", distTargetHole) + "m";
             if (dUserTargetTemp == -1)
             {
                 dUserTargetTemp = dUserTarget;
@@ -351,6 +386,12 @@ namespace GreenSa.ViewController.Play.Game
         {
             partie.setCurrentClub(club);
             LoadClubIcon(club);
+        }
+
+        // Get the current club
+        private Club getCurrentClub()
+        {
+            return partie.getCurrentClub();
         }
 
         /**

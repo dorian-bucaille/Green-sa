@@ -61,6 +61,11 @@ namespace GreenSa.Models.GolfModel
             CurrentClub = club;
         }
 
+        public Club getCurrentClub()
+        {
+            return CurrentClub;
+        }
+
         /**
          * Computes the number of penality shots done during the game
          */
@@ -167,6 +172,7 @@ namespace GreenSa.Models.GolfModel
         {
             MessagingCenter.Send<Partie>(this, "updateTheCircle");
         }
+
     }
 
 
