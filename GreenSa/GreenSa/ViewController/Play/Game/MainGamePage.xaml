@@ -94,7 +94,7 @@
                  HeightRequest="200"
                  VerticalOptions="Center"
                  HorizontalOptions="Start"
-                 Margin="7, -250, 0, 0"
+                 Margin="12, -250, 0, 0"
                  Opacity="0.5"/>
 
             <BoxView x:Name="tooFarZone"
@@ -105,7 +105,7 @@
                  VerticalOptions="Center"
                  HorizontalOptions="Start"
                  Margin="13, -420, 0, 0"
-                 Opacity="1"/>
+                 Opacity="0.8"/>
 
             <BoxView x:Name="mehFarZone"
                  Color="Orange"
@@ -115,7 +115,7 @@
                  VerticalOptions="Center"
                  HorizontalOptions="Start"
                  Margin="13, -331, 0, 0"
-                 Opacity="1"/>
+                 Opacity="0.8"/>
 
             <BoxView x:Name="goodZone"
                  Color="Green"
@@ -125,7 +125,7 @@
                  VerticalOptions="Center"
                  HorizontalOptions="Start"
                  Margin="13, -250, 0, 0"
-                 Opacity="1"/>
+                 Opacity="0.8"/>
 
             <BoxView x:Name="mehCloseZone"
                  Color="Orange"
@@ -135,7 +135,7 @@
                  VerticalOptions="Center"
                  HorizontalOptions="Start"
                  Margin="13, -168, 0, 0"
-                 Opacity="1"/>
+                 Opacity="0.8"/>
 
             <BoxView x:Name="tooCloseZone"
                  Color="Red"
@@ -145,7 +145,7 @@
                  VerticalOptions="Center"
                  HorizontalOptions="Start"
                  Margin="13, -79, 0, 0"
-                 Opacity="1"/>
+                 Opacity="0.8"/>
 
             <BoxView x:Name="confidenceCursor"
                  Color="White"
@@ -153,7 +153,7 @@
                  HeightRequest="5"
                  VerticalOptions="Center"
                  HorizontalOptions="Start"
-                 Margin="7, -250, 0, 0"/>
+                 Margin="13, -250, 0, 0"/>
 
             <ListView x:Name="ListHole">
                 <ListView.ItemTemplate>

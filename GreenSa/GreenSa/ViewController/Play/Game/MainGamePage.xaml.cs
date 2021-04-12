@@ -87,24 +87,24 @@ namespace GreenSa.ViewController.Play.Game
             cardBackground.BackgroundColor = Color.FromRgba(0, 0, 0, 0.5);
 
             // Responsive design for confidenceRectangle
-            confidenceRectangle.HeightRequest = MainPage.responsiveDesign(200);
-            confidenceRectangle.WidthRequest = MainPage.responsiveDesign(50);
+            confidenceRectangle.HeightRequest = MainPage.responsiveDesign(192);
+            confidenceRectangle.WidthRequest = MainPage.responsiveDesign(10);
 
             // Responsive design for confidenceCursor
             confidenceCursor.HeightRequest = MainPage.responsiveDesign(5);
-            confidenceCursor.WidthRequest = MainPage.responsiveDesign(50);
+            confidenceCursor.WidthRequest = MainPage.responsiveDesign(8);
 
             // Responsive design for tooFarZone and tooCloseZone
             tooFarZone.HeightRequest = tooCloseZone.HeightRequest = MainPage.responsiveDesign(45);
-            tooFarZone.WidthRequest = tooCloseZone.WidthRequest = MainPage.responsiveDesign(40);
+            tooFarZone.WidthRequest = tooCloseZone.WidthRequest = MainPage.responsiveDesign(8);
 
             // Responsive design for mehFarZone and mehCloseZone
             mehFarZone.HeightRequest = mehCloseZone.HeightRequest = MainPage.responsiveDesign(32);
-            mehFarZone.WidthRequest = mehCloseZone.WidthRequest = MainPage.responsiveDesign(40);
+            mehFarZone.WidthRequest = mehCloseZone.WidthRequest = MainPage.responsiveDesign(8);
 
             // Responsive design for goodZone
             goodZone.HeightRequest = MainPage.responsiveDesign(40);
-            goodZone.WidthRequest = MainPage.responsiveDesign(40);
+            goodZone.WidthRequest = MainPage.responsiveDesign(8);
 
             score.HeightRequest = MainPage.responsiveDesign(100);
             score.WidthRequest = MainPage.responsiveDesign(100);
@@ -267,7 +267,7 @@ namespace GreenSa.ViewController.Play.Game
             double percentage = distUsertarget / avg;  // S/O Alexandre Tschoumi for the mathematical formula
             int mar = Convert.ToInt32(-250 * percentage);  // The vertical margin to apply to confidenceCursor
 
-            confidenceCursor.Margin = new Thickness(7, mar, 0, 0);  // mar=-250 : best confidence. Lower : too close, greater : too far away.
+            confidenceCursor.Margin = new Thickness(13, mar, 0, 0);  // mar=-250 : best confidence. Lower : too close, greater : too far away.
 
         }
 
