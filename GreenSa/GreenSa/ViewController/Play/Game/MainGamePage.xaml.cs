@@ -267,8 +267,17 @@ namespace GreenSa.ViewController.Play.Game
             double percentage = distUsertarget / avg;  // S/O Alexandre Tschoumi for the mathematical formula
             int mar = Convert.ToInt32(-250 * percentage);  // The vertical margin to apply to confidenceCursor
 
-            confidenceCursor.Margin = new Thickness(13, mar, 0, 0);  // mar=-250 : best confidence. Lower : too close, greater : too far away.
+            // Prevent confidenceCursor from going out of the bar
+            if (mar < -420)
+            {
+                mar = -420;
+            }
+            else if (mar > -40)
+            {
+                mar = -40;
+            }
 
+            confidenceCursor.Margin = new Thickness(13, mar, 0, 0);  // mar=-250 : best confidence. Lower : too close, greater : too far away.
         }
 
         /**
