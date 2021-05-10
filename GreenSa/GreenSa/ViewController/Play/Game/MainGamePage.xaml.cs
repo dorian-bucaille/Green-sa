@@ -5,15 +5,11 @@ using GreenSa.Models.Tools.GPS_Maps;
 using GreenSa.Models.Tools.Services;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
-using Xamarin.Essentials;
 using GreenSa.Models.Profiles;
 
 
@@ -89,6 +85,27 @@ namespace GreenSa.ViewController.Play.Game
             cardBackground.WidthRequest = MainPage.responsiveDesign(50);
             cardBackground.CornerRadius = 100;
             cardBackground.BackgroundColor = Color.FromRgba(0, 0, 0, 0.5);
+
+            // Responsive design for confidenceRectangle
+            confidenceRectangle.HeightRequest = MainPage.responsiveDesign(192);
+            confidenceRectangle.WidthRequest = MainPage.responsiveDesign(10);
+
+            // Responsive design for confidenceCursor
+            confidenceCursor.HeightRequest = MainPage.responsiveDesign(5);
+            confidenceCursor.WidthRequest = MainPage.responsiveDesign(8);
+
+            // Responsive design for tooFarZone and tooCloseZone
+            tooFarZone.HeightRequest = tooCloseZone.HeightRequest = MainPage.responsiveDesign(45);
+            tooFarZone.WidthRequest = tooCloseZone.WidthRequest = MainPage.responsiveDesign(8);
+
+            // Responsive design for mehFarZone and mehCloseZone
+            mehFarZone.HeightRequest = mehCloseZone.HeightRequest = MainPage.responsiveDesign(32);
+            mehFarZone.WidthRequest = mehCloseZone.WidthRequest = MainPage.responsiveDesign(8);
+
+            // Responsive design for goodZone
+            goodZone.HeightRequest = MainPage.responsiveDesign(40);
+            goodZone.WidthRequest = MainPage.responsiveDesign(8);
+
             score.HeightRequest = MainPage.responsiveDesign(100);
             score.WidthRequest = MainPage.responsiveDesign(100);
 
@@ -118,6 +135,15 @@ namespace GreenSa.ViewController.Play.Game
             MessagingCenter.Subscribe<System.Object>(this, CustomPin.UPDATEDMESSAGE_CIRCLE, (sender) => {
                 updateDistance();
             });
+
+            // When the target pin is moved => update the confidence cursor position
+            MessagingCenter.Subscribe<CustomPin>(this, CustomPin.UPDATEDMESSAGE, (sender) => {
+                updateConfidence();
+            });
+            MessagingCenter.Subscribe<System.Object>(this, CustomPin.UPDATEDMESSAGE_CIRCLE, (sender) => {
+                updateConfidence();
+            });
+
             //this message details the state of the game 0 if hole isn't finished, 1 otherwise and 2 if the game is finished
             MessagingCenter.Subscribe<HoleFinishedPage, int>(this, "ReallyFinit", (sender, val) => {
                 holFini = val;
@@ -226,6 +252,35 @@ namespace GreenSa.ViewController.Play.Game
         }
 
         /**
+          * Update the confidence cursor position
+          * OnAppearing : true if the method is called in the OnAppearing method, false otherwise
+          */
+        private void updateConfidence(bool OnAppearing = false)
+        {
+            partie.updateUICircle();
+
+            dUserTarget = map.getDistanceUserTarget();  // Update class user to target distance
+            var distUsertarget = map.getDistanceUserTarget();  // User to target distance
+
+            Club c = getCurrentClub();
+            double avg = GestionGolfs.getAvg(c);  // The average distance with the current club
+            double percentage = distUsertarget / avg;  // S/O Alexandre Tschoumi for the mathematical formula
+            int mar = Convert.ToInt32(-250 * percentage);  // The vertical margin to apply to confidenceCursor
+
+            // Prevent confidenceCursor from going out of the bar
+            if (mar < -420)
+            {
+                mar = -420;
+            }
+            else if (mar > -40)
+            {
+                mar = -40;
+            }
+
+            confidenceCursor.Margin = new Thickness(13, mar, 0, 0);  // mar=-250 : best confidence. Lower : too close, greater : too far away.
+        }
+
+        /**
          * Updates the distances on the top right hand corner of the screen
          * OnAppearing : true if the method is called in the OnAppearing method, false otherwise
          */
@@ -237,7 +292,7 @@ namespace GreenSa.ViewController.Play.Game
             distTrou.Text = string.Format("{0:0.0}", map.getDistanceUserHole()) + "m";
             var distUsertarget = map.getDistanceUserTarget();
             var distTargetHole = map.getDistanceTargetHole();
-            distTarget.Text = string.Format("{0:0.0}", distUsertarget) + " + " + string.Format("{0:0.0}", distTargetHole) + "m";
+            distTarget.Text = string.Format("{0:0.0}", distUsertarget) + "m + " + string.Format("{0:0.0}", distTargetHole) + "m";
             if (dUserTargetTemp == -1)
             {
                 dUserTargetTemp = dUserTarget;
@@ -351,6 +406,12 @@ namespace GreenSa.ViewController.Play.Game
         {
             partie.setCurrentClub(club);
             LoadClubIcon(club);
+        }
+
+        // Get the current club
+        private Club getCurrentClub()
+        {
+            return partie.getCurrentClub();
         }
 
         /**

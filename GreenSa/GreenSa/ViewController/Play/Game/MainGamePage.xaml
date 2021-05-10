@@ -87,6 +87,74 @@
               Clicked="OnScoreClicked" BackgroundColor="Transparent"
               FontAttributes ="Bold" FontSize ="28" TextColor="White"/>
 
+            <BoxView x:Name="confidenceRectangle"
+                 Color="Black"
+                 CornerRadius="10"
+                 WidthRequest="50"
+                 HeightRequest="200"
+                 VerticalOptions="Center"
+                 HorizontalOptions="Start"
+                 Margin="12, -250, 0, 0"
+                 Opacity="0.5"/>
+
+            <BoxView x:Name="tooFarZone"
+                 Color="Red"
+                 CornerRadius="10, 10, 0, 0"
+                 WidthRequest="40"
+                 HeightRequest="45"
+                 VerticalOptions="Center"
+                 HorizontalOptions="Start"
+                 Margin="13, -420, 0, 0"
+                 Opacity="0.8"/>
+
+            <BoxView x:Name="mehFarZone"
+                 Color="Orange"
+                 CornerRadius="0, 0, 0, 0"
+                 WidthRequest="40"
+                 HeightRequest="32"
+                 VerticalOptions="Center"
+                 HorizontalOptions="Start"
+                 Margin="13, -331, 0, 0"
+                 Opacity="0.8"/>
+
+            <BoxView x:Name="goodZone"
+                 Color="Green"
+                 CornerRadius="0, 0, 0, 0"
+                 WidthRequest="40"
+                 HeightRequest="35"
+                 VerticalOptions="Center"
+                 HorizontalOptions="Start"
+                 Margin="13, -250, 0, 0"
+                 Opacity="0.8"/>
+
+            <BoxView x:Name="mehCloseZone"
+                 Color="Orange"
+                 CornerRadius="0, 0, 0, 0"
+                 WidthRequest="40"
+                 HeightRequest="32"
+                 VerticalOptions="Center"
+                 HorizontalOptions="Start"
+                 Margin="13, -168, 0, 0"
+                 Opacity="0.8"/>
+
+            <BoxView x:Name="tooCloseZone"
+                 Color="Red"
+                 CornerRadius="0, 0, 10, 10"
+                 WidthRequest="40"
+                 HeightRequest="45"
+                 VerticalOptions="Center"
+                 HorizontalOptions="Start"
+                 Margin="13, -79, 0, 0"
+                 Opacity="0.8"/>
+
+            <BoxView x:Name="confidenceCursor"
+                 Color="White"
+                 WidthRequest="50"
+                 HeightRequest="5"
+                 VerticalOptions="Center"
+                 HorizontalOptions="Start"
+                 Margin="13, -250, 0, 0"/>
+
             <ListView x:Name="ListHole">
                 <ListView.ItemTemplate>
                     <DataTemplate>

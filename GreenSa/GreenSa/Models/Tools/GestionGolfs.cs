@@ -45,6 +45,21 @@ namespace GreenSa.Models.GolfModel
             return gfcs;
         }
 
+        // Return the average distance for a given club
+        public static double getAvg(Club c)
+        {
+            double res = -1;  // Default value
+
+            foreach (Tuple<Club, double> tuple in listAverage)
+            {
+                if (tuple.Item1.Equals(c)) {
+                    res = tuple.Item2;  // Replace res by actual average distance of the club
+                }
+            }
+
+            return res;
+        } 
+
         /**
          * Gets a list of clubs using a filter
          * if the filter is null, then all clubs are returned

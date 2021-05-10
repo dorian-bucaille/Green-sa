@@ -28,7 +28,7 @@ namespace GreenSa.Models.Tools.Services
             string fullUrl = url + appid + "&lat=" + position.X + "&lon=" + position.Y;
 
             img = ImageSource.FromResource("GreenSa.Ressources.Images.left-arrow.png");
-                   
+
             return await FetchData(fullUrl);
         }
 
@@ -53,11 +53,12 @@ namespace GreenSa.Models.Tools.Services
 
                         while (reader.Read())
                         {
-                            if(reader.Value != null && reader.TokenType.ToString() == "PropertyName")
-                            {   
+                            if (reader.Value != null && reader.TokenType.ToString() == "PropertyName")
+                            {
                                 //if(reader.TokenType.ToString() == "String")
-                                Debug.WriteLine("Token : "+reader.Value);
-                                switch(((string) reader.Value)) {
+                                Debug.WriteLine("Token : " + reader.Value);
+                                switch (((string)reader.Value))
+                                {
                                     case "speed":
                                         reader.Read();
                                         Debug.WriteLine("Value : " + reader.Value);
@@ -72,13 +73,11 @@ namespace GreenSa.Models.Tools.Services
                             }
                         }
                         return new WindInfo(speed, deg, img);
-                        
+
                     }
                 }
             }
         }
-
-
 
         public static bool isAvaible()
         {
